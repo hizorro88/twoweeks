@@ -1,86 +1,53 @@
-<!--//
-/*This Script allows people to enter by using a form that asks for a
-UserID and Password*/
-function pasuser(form) {
-if (form.id.value=="JavaScript") { 
-if (form.pass.value=="Kit") {              
-location="page2.html" 
-} else {
-alert("Invalid Password")
-}
-} else {  alert("Invalid UserID")
-}
-}
+$(document).ready(function () {
+	$('#login').click(function(){
+		var id = document.loginForm.inputID.value;
+		var pw = document.loginForm.inputPassword.value;
+
+		//해당 아이디와 패스워드로 서버에 전송
 
 
-/* ><form name="login"><input
-name="id" type="text"></td></tr>
-<tr><td><h1><i><b>Password:</b></i></h1></td><td><input name="pass"
-type="password"></td></tr>
-<tr><td><center><input type="button" value="Login"
-onClick="pasuser(this.form)"></center></td><td><center><br><input
-type="Reset"></form> */
+		//서버에서 토큰값을 받아옴
+		
+
+		//거절 토큰인 경우, login화면을 refresh
+		//alert("아이디나 비밀번호를 확인하세요.")
+		//location.reload();
+	    
+	    
+		//승인 토큰인 경우,
+		//if (승인 토큰){}
+		//패스워드가 1234인 경우,
+		if (pw == "1234"){
+			//토큰, 아이디 값을 넘긴다.
+			store.set('token', '01097770994')
+			//store.remove('username')
+			//store.clear()
+			//store.set('user', { name: 'joe', likes: 'javascript' })
+			//var user = store.get('user')
+			//document.write(user.name + ' likes ' + user.likes)
+			//로그인 수정화면으로 이동
+			location.href="/views/loginUpdate.html"
+		} else {
+			//목록 화면으로 이동
+			location.href="/views/list.html"
+		}
+	});
+});
 
 
-----------------------------------------------------------------------
 
-<script type = "text/javascript">
 
-// Note: Like all Javascript password scripts, this is hopelessly insecure as the user can see 
-//the valid usernames/passwords and the redirect url simply with View Source.  
-// And the user can obtain another three tries simply by refreshing the page.  
-//So do not use for anything serious!
+// var valid = false;
 
-var count = 2;
-function validate() {
-var un = document.myform.username.value;
-var pw = document.myform.pword.value;
-var valid = false;
+// var unArray = ["Philip", "George", "Sarah", "Michael"];  // as many as you like - no comma after final entry
 
-var unArray = ["Philip", "George", "Sarah", "Michael"];  // as many as you like - no comma after final entry
-var pwArray = ["Password1", "Password2", "Password3", "Password4"];  // the corresponding passwords;
+// for (var i=0; i <unArray.length; i++) {
+// if ((un == unArray[i]) && (pw == pwArray[i])) {
+// valid = true;
+// break;
+// }
+// }
 
-for (var i=0; i <unArray.length; i++) {
-if ((un == unArray[i]) && (pw == pwArray[i])) {
-valid = true;
-break;
-}
-}
+// setTimeout("document.myform.username.focus()", 25);
 
-if (valid) {
-alert ("Login was successful");
-window.location = "http://www.google.com";
-return false;
-}
-
-var t = " tries";
-if (count == 1) {t = " try"}
-
-if (count >= 1) {
-alert ("Invalid username and/or password.  You have " + count + t + " left.");
-document.myform.username.value = "";
-document.myform.pword.value = "";
-setTimeout("document.myform.username.focus()", 25);
-setTimeout("document.myform.username.select()", 25);
-count --;
-}
-
-else {
-alert ("Still incorrect! You have no more tries left!");
-document.myform.username.value = "No more tries allowed!";
-document.myform.pword.value = "";
-document.myform.username.disabled = true;
-document.myform.pword.disabled = true;
-return false;
-}
-
-}
-
-</script>
-
-<form name = "myform">
-<p>ENTER USER NAME <input type="text" name="username"> ENTER PASSWORD <input type="password" name="pword">
-<input type="button" value="Check In" name="Submit" onclick= "validate()">
-</p>
-
-</form>
+// document.myform.username.disabled = true;
