@@ -1,53 +1,76 @@
 $(document).ready(function () {
+
+	//id 입력하는 부분
+	$('#userId').keyup(function(){
+		var str = $(this).val()
+		str = str.trim() //공백제거
+		str = str.replace(/[^0-9]/g, "")
+
+		var tmp = "";
+        if( str.length < 4){
+            $(this).val(str);
+        } else if (str.length < 7){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            $(this).val(tmp);
+        } else if (str.length < 11){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            $(this).val(tmp);
+        } else {      
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            $(this).val(tmp);
+        }
+	});
+
+	// $.getJSON('/temp.json', function(data){
+
+	// 	$.each(data, function(key, value){
+	// 		$('body').append(value);	
+	// 	});
+	// });
+
+	//로그인 버튼 클릭
 	$('#login').click(function(){
-		var id = document.loginForm.inputID.value;
-		var pw = document.loginForm.inputPassword.value;
+		var id = $('#userId').val()
+		var pw = $('#password').val()
 
-		//해당 아이디와 패스워드로 서버에 전송
+		//보낼 때
+		$.ajax({
+			url: '/temp.json',
+			type: 'get',
+			dataType: 'json',
+			data: {
+				userId: id,
+				password: pw
+			},
+			success: function(data) {
+				//토큰, 아이디, 이름, 팀 저장
+				store.set('token', data)
+				store.set('userId', id)
+				store.set('name', "###")
+				store.set('team', "@@@")
 
-
-		//서버에서 토큰값을 받아옴
-		
-
-		//거절 토큰인 경우, login화면을 refresh
-		//alert("아이디나 비밀번호를 확인하세요.")
-		//location.reload();
-	    
-	    
-		//승인 토큰인 경우,
-		//if (승인 토큰){}
-		//패스워드가 1234인 경우,
-		if (pw == "1234"){
-			//토큰, 아이디 값을 넘긴다.
-			store.set('token', '01097770994')
-			//store.remove('username')
-			//store.clear()
-			//store.set('user', { name: 'joe', likes: 'javascript' })
-			//var user = store.get('user')
-			//document.write(user.name + ' likes ' + user.likes)
-			//로그인 수정화면으로 이동
-			location.href="/views/loginUpdate.html"
-		} else {
-			//목록 화면으로 이동
-			location.href="/views/list.html"
-		}
+				if (pw == "1234"){
+					//로그인 수정화면으로 이동
+					location.href="/views/loginUpdate.html"
+				} else {
+					//목록 화면으로 이동
+					location.href="/views/list.html"
+				}
+			},
+			error: function(data, status, err) {
+				alert("아이디나 비밀번호를 확인하세요.")
+				location.reload();
+			}
+		});
 	});
 });
-
-
-
-
-// var valid = false;
-
-// var unArray = ["Philip", "George", "Sarah", "Michael"];  // as many as you like - no comma after final entry
-
-// for (var i=0; i <unArray.length; i++) {
-// if ((un == unArray[i]) && (pw == pwArray[i])) {
-// valid = true;
-// break;
-// }
-// }
-
-// setTimeout("document.myform.username.focus()", 25);
-
-// document.myform.username.disabled = true;

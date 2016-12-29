@@ -7,72 +7,50 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../bootstrap-3.3.7/favicon.ico">
 
     <title>로그인 수정</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../css/signin.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
 
     <div class="container">
-      <form class="form-signin">
+      <form class="form-signin" name="updatePwForm">
         <h2 class="form-signin-heading">로그인 수정</h2>
 
         <!-- ID Default -->
-        <div class="form-group row">
-            <label for="id" class="col-xs-3 col-form-label">ID</label>
-            <div class="col-xs-9">
-                <p class="form-control-static" id="id">01012341234</p>
-            </div>
-        </div>
+        <label for="id" class="col-form-label">ID</label>
+        <p class="form-control-static" id="id" style="padding-left: 30px; font-size: 20px"></p>
+
         <label for="NewPassword">새 비밀번호</label>
         <input type="password" id="NewPassword" class="form-control" placeholder="새로운 비밀번호를 입력하세요." required autofocus>
         <label for="RePassword">비밀번호 확인</label>
         <input type="password" id="RePassword" class="form-control" placeholder="다시 한 번 입력하세요." required>
         
         <!-- 이름 -->
-        <div class="form-group row">
-            <label for="name" class="col-xs-3 col-form-label">이름</label>
-            <div class="col-xs-9">
-                <p class="form-control-static" id="name">홍길동</p>
-            </div>
-        </div>
+        <label for="name" class="col-form-label">이름</label>
+        <p class="form-control-static" id="name" style="padding-left: 30px; font-size: 20px"></p>
 
         <!-- 부서 -->
-        <div class="form-group row">
-            <label for="team" class="col-xs-3 col-form-label">팀</label>
-            <div class="col-xs-9">
-                <p class="form-control-static" id="team">플랫폼사업개발팀</p>
-            </div>
-        </div>
+        <label for="team" class="col-form-label">팀</label>
+        <p class="form-control-static" id="team" style="padding-left: 30px; font-size: 20px"></p>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">확인</button>
-        <a href="list.html" class="btn btn-lg btn-primary btn-block" role="button" >취소</a>
+        <a class="btn btn-lg btn-primary btn-block" role="button" id="updatePassword">확인</a>
+
+        <a class="btn btn-lg btn-primary btn-block" role="button" id="back" >취소</a>
 
       </form>
     </div> <!-- /container -->
 
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/store-js/store.min.js"></script>
+    <script src="../js/loginUpdate.js"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
