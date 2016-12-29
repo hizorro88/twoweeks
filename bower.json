@@ -1,0 +1,23 @@
+{
+  "name": "twoweeks",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Jang.Woncheol <jang.woncheol@kt.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/hizorro88/twoweeks",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "store-js": "store.js#^1.3.20"
+  }
+}
