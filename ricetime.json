@@ -1,10 +1,26 @@
 {
-    "riceTimeId": "124125125215",
-    "title": "TESTCREATION",
-    "maker": "JJJ",
-    "location": "KWHANGWHA",
-    "content": "TEST2",
-    "category": "RICE",
-    "cDate": 1483330968000,
-    "mDate": null
+  "riceTimeId": "0c56a6f6-35b6-4427-be7e-7a3f69af87f9",
+  "title": "make meeting",
+  "maker": "010-1111-4444",
+  "location": "woomyun",
+  "content": null,
+  "category": "rice",
+  "cDate": null,
+  "mDate": null,
+  "joinRiceTime": [
+    {
+      "joinRiceTimeId": "123",
+      "riceTimeId": "0c56a6f6-35b6-4427-be7e-7a3f69af87f9",
+      "joiner": "JJJ",
+      "cDate": 1483432132000,
+      "mDate": 1483432132000
+    },
+    {
+      "joinRiceTimeId": "124",
+      "riceTimeId": "0c56a6f6-35b6-4427-be7e-7a3f69af87f9",
+      "joiner": "JWC",
+      "cDate": 1483432139000,
+      "mDate": 1483432139000
+    }
+  ]
 }

@@ -13,19 +13,20 @@ $(document).ready(function(){
 			$("#NewPassword").val("");
 			$("#RePassword").val("");
 			$("#NewPassword").focus();
+
 		} else if (newPw == rePw) {
 			//서버에 패스워드 변경 요청
 			$.ajax({
-				url: '{{url}}/user/' + store.get("userId"),
+				url: 'http://192.168.3.1:8000/user/' + store.get("userId"),
 				headers: {
 		        	'Content-Type':'application/json',
 		        	'Authorization':store.get("token")
 		    	},
 				type: 'put',
 				dataType: 'json',
-				data: {
+				data: JSON.stringify({
 					password : newPw
-				},
+				}),
 				success: function(data) {
 					//목록 화면으로 이동
 					location.href="/views/list.html";

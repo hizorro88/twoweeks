@@ -36,7 +36,7 @@ $(document).ready(function(){
 		    },
 			type: 'put',
 			dataType: 'json',
-			data: {
+			data: JSON.stringify({
 				//작성자, 팀, 제목, 장소, 만남일, 범주, 내용
 				userId: store.get("#userId"),
 				// name: $('#name').val(),
@@ -46,7 +46,7 @@ $(document).ready(function(){
 				meetingdate: $('#meetingdate').val(),
 				// category: $('#category').val(),
 				contents: $('#contents').val()
-			},
+			}),
 			success: function(data) {
 				store.remove("data");
 				location.href="/views/detail.html";

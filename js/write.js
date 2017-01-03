@@ -29,7 +29,7 @@ $(document).ready(function(){
 		    },
 			type: 'post',
 			dataType: 'json',
-			data: {
+			data: JSON.stringify({
 				//작성자, 팀, 제목, 장소, 만남일, 범주, 내용
 				userId: store.get("userId"),
 				name: store.get("name"),
@@ -41,7 +41,7 @@ $(document).ready(function(){
 				contents: $('#contents').val()
 
 				//기본적으로 본인이 참가자리스트에 추가되어야함.
-			},
+			}),
 			success: function(data) {
 				location.href="/views/list.html"
 			}

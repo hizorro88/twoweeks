@@ -33,28 +33,27 @@ $(document).ready(function () {
 
 	//로그인 버튼 클릭
 	$('#login').click(function(){
-		var id = $('#userId').val()
-		var pw = $('#password').val()
+		var id = $('#userId').val();
+		var pw = $('#password').val();
 
 		//보낼 때
 		$.ajax({
-			url: 'http://192.168.3.1:8000',
+			url: 'http://192.168.3.1:8000/user/login',
 			headers: {
 		        'Content-Type':'application/json'
 		    },
 			type: 'post',
 			dataType: 'json',
-			data: {
+			data: JSON.stringify({
 				userId: id,
 				password: pw
-			},
+			}),
 			success: function(data) {
-
-				//토큰, 아이디, 이름 저장
-				store.set("token", data.token);
-				store.set("name", data.name);
+				//아이디, 이름, 토큰 저장
 				store.set("userId", id);
-
+				store.set("username", data.username);
+				store.set("token", data.token);
+				
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동
 					location.href="/views/loginUpdate.html"
@@ -64,9 +63,10 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data, status, err) {
-
 				alert("아이디나 비밀번호를 확인하세요.")
-				location.reload();
+				$('#userId').val("");
+				$('#password').val("");
+				$('#userId').focus();
 			}
 		});
 	});
