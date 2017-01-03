@@ -1,38 +1,71 @@
-//token 을 가지고 있는지 검사
-// 1. 카테고리에 따라 리스트 재정렬
-// 2. 전체 정보 가져와서 반복하여 폼에 보여주기, 정렬조건에 따라 필터링된 리스트만 구
-// 3. 해당 게시물 클릭 시, 상세보기로 이동
-
 $(document).ready(function(){
 	
-	var test = store.get('token')
-	
-	$('#updatePassword').click(function(){
-		var newPw = document.updatePwForm.NewPassword.value;
-		var rePw = document.updatePwForm.RePassword.value;
+	var totalList;	//받아온 데이터를 저장할 변수
+	var listLen;	//받아온 데이터 객체의 수
 
-		//입력된 패스워드가 동일한 경우,
-		if (newPw == "1234"){
-			alert("다른 비밀번호를 입력하세요.")
-			location.reload()
-		} else if (newPw != "1234" && newPw == rePw){
-			//목록 화면으로 이동
-			location.href="/views/list.html"
-		} else {
-			//다시 로드
-			alert("동일한 비밀번호를 입력하세요.")
-			location.reload()
+	$.ajax({
+		// url: 'http://192.168.3.1:8000/ricetimes/',
+		url: '../dummy.json',
+		headers: {
+        	'Content-Type':'application/json',
+        	'Authorization':store.get("token")
+    	},
+    	async: false, //결과값 정렬을 위해 전역변수에 넣어 두기 위해
+		type: 'get',
+		dataType: 'json',
+		success: function(data) {
+			totalList = data;
+	        listLen = totalList.length;
+
+	        for(var i=0; i<listLen; i++){
+				$("#panelGroup").append("<div class='panel panel-default' id='panel"+i+"'>"+
+											"<div class='panel-body'>"+
+												"<span id='category"+i+"'></span>"+
+												"<a id='title"+i+"'></a>"+
+												"<span id='meetingdate"+i+"'></span>"+
+												"<span id='name"+i+"'></span>"+ //작성자
+												// "<span class='badge' id='attendee"+i+"'></span>"+ //참가자
+											"</div>"+
+										"</div>");
+
+				//어느 부분에 정보를 보여줄 것인지 결정하기 위해 tag 마다 ID 값을 부여함.
+				$("#location"+i).text(totalList[i].location); // 카테고리로 변경해야함.
+	            $("#title"+i).text(totalList[i].title);
+	            $("#meetingdate"+i).text(totalList[i].meetingdate);
+	            $("#name"+i).text("name");
+	            // $("#attendee"+i).text("attendee");
+	        }
 		}
 	});
 
-	$('#back').click(function(){
-		history.back()
+	//조건에 맞는 ID 를 가진 것들은 보이게 하고 나머지는 보이지 않게 하기
+	$("#selectBox").change(function(){
+		categorySort($(this).children("option:selected").text());
 	});
 
-});
+	function categorySort(x){
+		for(var i=0; i<listLen; i++){
+			if (x == "전체"){
+				$("#panel" + i).show();
+			} else if(totalList[i].category == x){
+				$("#panel" + i).show();
+			} else {
+				$("#panel" + i).hide();
+			}
+		}
+	};
 
-//store.remove('username')
-//store.clear()
-//store.set('user', { name: 'joe', likes: 'javascript' })
-//var user = store.get('user')
-//document.write(user.name + ' likes ' + user.likes)
+	//글 작성 클릭 시, //목록 화면으로 이동
+	$("#write").click(function(){
+		location.href="/views/write.html";
+	});
+
+	//해당 게시물 클릭 시, 상세보기로 이동 
+	$("a").click(function(){
+		var titleId = $(this).attr("id");
+		var lastNumber = titleId.substr(5, titleId.length);
+
+		store.set('number', totalList[lastNumber].riceTimeId)
+		location.href="/views/detail.html?" + totalList[lastNumber].riceTimeId
+	});
+});

@@ -1,40 +1,55 @@
-// 폼에 작성된 내용을 JSON으로 변환하여 서버로 POST 형식으로 전송
-// 작성버튼 클릭 시, 리스트 화면으로 이동
-// 취소버튼 클릭 시, 목록 화면으로 이동
-
-
 $(document).ready(function(){
-	//해당 ID를 보내고 받아온 정보를 화면 출력
-	var test = store.get('token')
 	
-
-	//비밀번호를 받아서 두 PW가 일치하면 update 요청
-	$('#updatePassword').click(function(){
-		var newPw = document.updatePwForm.NewPassword.value;
-		var rePw = document.updatePwForm.RePassword.value;
-
-		//입력된 패스워드가 동일한 경우,
-		if (newPw == "1234"){
-			alert("다른 비밀번호를 입력하세요.")
-			location.reload()
-		} else if (newPw != "1234" && newPw == rePw){
-			//목록 화면으로 이동
-			location.href="/views/list.html"
-		} else {
-			//다시 로드
-			alert("동일한 비밀번호를 입력하세요.")
-			location.reload()
+	$("#name").text(store.get("name"));
+	
+	//미작성 부분 체크 (팀, 제목, 만남일, 내용)
+	function checkForm(){
+		if ($("#team").val() == ""){
+			$("#team").focus();
+		} else if ($("#title").val() == ""){
+			$("#title").focus();
+		} else if ($("#meetDay").val() == ""){
+			$("#meetDay").focus();
+		} else if ($("#contents").val() == ""){
+			$("#contents").focus();
 		}
+	}
+
+	// 작성버튼 클릭 시, 서버에 정보를 보내고 리스트 화면으로 이동
+	$('#submit').click(function(){
+		
+		//미작성 부분 체크
+		checkForm();
+
+		$.ajax({
+			url: '{{url}}/ricetimes/{{ricetimeId}}/persons',
+			headers: {
+		        'Content-Type':'application/json',
+	        	'Authorization':store.get("token")
+		    },
+			type: 'post',
+			dataType: 'json',
+			data: {
+				//작성자, 팀, 제목, 장소, 만남일, 범주, 내용
+				userId: store.get("userId"),
+				name: store.get("name"),
+				team: $('#team').val(),
+				title: $('#title').val(),
+				meetingDate: $('#meetingDate').val(),
+				location: $('#location').val(),
+				// category: $('#category').val(),
+				contents: $('#contents').val()
+
+				//기본적으로 본인이 참가자리스트에 추가되어야함.
+			},
+			success: function(data) {
+				location.href="/views/list.html"
+			}
+		});
 	});
 
+	// 취소버튼 클릭 시, 이전 화면으로 이동
 	$('#back').click(function(){
 		history.back()
 	});
-
 });
-
-//store.remove('username')
-//store.clear()
-//store.set('user', { name: 'joe', likes: 'javascript' })
-//var user = store.get('user')
-//document.write(user.name + ' likes ' + user.likes)

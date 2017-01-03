@@ -1,9 +1,10 @@
 {
-  "riceTimeId": "1111111",
-  "title": "false",
-  "maker": "Owener",
-  "location": "woomyun",
-  "content": "test",
-  "category": "rice",
-  "date": 1483339411435
+    "riceTimeId": "124125125215",
+    "title": "TESTCREATION",
+    "maker": "JJJ",
+    "location": "KWHANGWHA",
+    "content": "TEST2",
+    "category": "RICE",
+    "cDate": 1483330968000,
+    "mDate": null
 }

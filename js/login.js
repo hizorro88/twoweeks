@@ -31,13 +31,6 @@ $(document).ready(function () {
         }
 	});
 
-	// $.getJSON('/temp.json', function(data){
-
-	// 	$.each(data, function(key, value){
-	// 		$('body').append(value);	
-	// 	});
-	// });
-
 	//로그인 버튼 클릭
 	$('#login').click(function(){
 		var id = $('#userId').val()
@@ -45,19 +38,22 @@ $(document).ready(function () {
 
 		//보낼 때
 		$.ajax({
-			url: '/temp.json',
-			type: 'get',
+			url: 'http://192.168.3.1:8000',
+			headers: {
+		        'Content-Type':'application/json'
+		    },
+			type: 'post',
 			dataType: 'json',
 			data: {
 				userId: id,
 				password: pw
 			},
 			success: function(data) {
-				//토큰, 아이디, 이름, 팀 저장
-				store.set('token', data)
-				store.set('userId', id)
-				store.set('name', "###")
-				store.set('team', "@@@")
+
+				//토큰, 아이디, 이름 저장
+				store.set("token", data.token);
+				store.set("name", data.name);
+				store.set("userId", id);
 
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동
@@ -68,6 +64,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data, status, err) {
+
 				alert("아이디나 비밀번호를 확인하세요.")
 				location.reload();
 			}

@@ -22,76 +22,74 @@
       <h1>Rice Time 상세</h1>
 
       <div class="form-group row">
-        <label for="writer" class="col-md-2 col-form-label">작성자</label>
+        <label for="name" class="col-md-2 col-form-label">작성자</label>
         <div class="col-md-10">
-          <input class="form-control" type="text" value="###" id="writer">
+          <input class="form-control" type="text" id="name" readonly="readonly">
+          <!-- <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p> -->
         </div>
       </div>
       <div class="form-group row">
         <label for="team" class="col-md-2 col-form-label">팀</label>
         <div class="col-md-10">
-          <input class="form-control" type="search" value="###" id="team">
+          <input class="form-control" type="text" id="team" readonly="readonly">
         </div>
       </div>
       <div class="form-group row">
         <label for="title" class="col-md-2 col-form-label">제목</label>
         <div class="col-md-10">
-          <input class="form-control" type="text" placeholder="광화문에서 한께 식사하실분~?" id="title">
+          <input class="form-control" type="text" id="title" readonly="readonly">
+          <!-- <p class="form-control-static" id="title" style="padding-left: 10px; font-size: 15px"></p> -->
         </div>
       </div>
       <div class="form-group row">
         <label for="place" class="col-md-2 col-form-label">장소</label>
         <div class="col-md-10">
-          <select class="form-control" id="place">
-            <option>광화문</option>
-            <option>양재</option>
-            <option>분당</option>
-          </select>
+          <input class="form-control" type="text" id="location" readonly="readonly">
+          <!-- <p class="form-control-static" id="location" style="padding-left: 10px; font-size: 15px"></p> -->
         </div>
       </div>
       <div class="form-group row">
         <label for="meetDay" class="col-md-2 col-form-label">만남일</label>
         <div class="col-md-10">
-          <input class="form-control" type="datetime-local" placeholder="2011-08-19T13:45:00" id="meetDay">
+          <input class="form-control" type="text" id="meetingdate" readonly="readonly">
+          <!-- <p class="form-control-static" id="meetingdate" style="padding-left: 10px; font-size: 15px"></p> -->
         </div>
       </div>
-      <div class="form-group row">
-        <label for="foodCategory" class="col-md-2 col-form-label">범주</label>
+      <!-- <div class="form-group row">
+        <label for="category" class="col-md-2 col-form-label">범주</label>
         <div class="col-md-10">
-          <select class="form-control" id="foodCategory">
-            <option>밥</option>
-            <option>술</option>
-            <option>커피</option>
-          </select>
+          <p class="form-control-static" id="category" style="padding-left: 10px; font-size: 15px"></p>
         </div>
-      </div>
+      </div> -->
       <div class="form-group row">
         <label for="contents" class="col-md-2 col-form-label">내용</label>
         <div class="col-md-10">
-          <textarea class="form-control" placeholder="광화문 D-tower에 한육감에서 함께 고기 먹어요!" rows="5" id="contents"></textarea>
+          <textarea class="form-control" rows="5" id="contents" readonly="readonly"></textarea>
         </div>
       </div>
-      <div class="form-group row">
+      <div class="form-group row" id="attendQ">
         <label for="attend" class="col-md-2 col-form-label">참석하시겠습니까?</label>
         <div class="col-md-10">
-          <a href="#" class="btn btn-sm btn-primary" role="button" id="attend">네</a>
+          <a class="btn btn-sm btn-primary" role="button" id="attend">네</a>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="attendList" class="col-md-2 col-form-label">참석자명단</label>
-        <div class="col-md-10">
-          <a href="#" class="btn btn-sm btn-primary" role="button" id="attendList">홍길동 <span class="glyphicon glyphicon-remove"></span></a>
+      <div class="form-group row" id="attendBtn">
+        <label for="attendBtn" class="col-md-2 col-form-label">참석자명단</label>
+        <div class="col-md-10" id="attendList">
+          <a class='btn btn-sm btn-primary' role='button' id='attendee'></a>
         </div>
       </div>
       <div class="form-group pull-right">
-        <a href="#" class="btn btn-primary" role="button">수정</a>
-        <a href="#" class="btn btn-primary" role="button">삭제</a>
-        <a href="list.html" class="btn btn-primary" role="button">목록</a>
+        <a class="btn btn-primary" role="button" id="update">수정</a>
+        <a class="btn btn-primary" role="button" id="delete">삭제</a>
+        <a class="btn btn-primary" role="button" id="list">목록</a>
       </div>
     
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/store-js/store.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    
+    <!-- <script src="../js/common.js"></script> -->
+    <script src="../js/detail.js"></script>
+
   </body>
 </html>
