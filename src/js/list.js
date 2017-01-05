@@ -18,10 +18,12 @@ $(document).ready(function(){
 			totalList = data;
 	        listLen = totalList.length;
 
+
+
 	        for(var i=0; i<listLen; i++){
 	        	//style='max-height: 5;'
 				$("#panelGroup").append("<div class='panel panel-primary' id='panel"+i+"'>"+
-											"<div class='panel-heading'>"+
+											"<div class='panel-heading' style='min-height: 50px; max-height: 50px; vertical-align: middle;'>"+
 												"<h4 class='panel-title'>"+
 													"<span id='"+totalList[i].riceTimeId+"' style='padding:0px 10px 0px 0px;'></span>"+
 												"</h4>"+
@@ -45,11 +47,15 @@ $(document).ready(function(){
 
 				// 	 <div class="panel-footer">Panel footer</div>
 				
-				$("#"+totalList[i].riceTimeId).text(totalList[i].title); //제목
+				var subtitle = totalList[i].title;
+				if (subtitle.length > 42){
+					$("#"+totalList[i].riceTimeId).text(subtitle.substring(0, 42) + "..."); //제목
+				} else {
+					$("#"+totalList[i].riceTimeId).text(subtitle); //제목
+				}
+				
 				var date = totalList[i].meetingDate;
-				
 				var finalDate = date.substring(0, 10) +" "+ date.substring(11, 16);
-				
 	            $("#meetingDate"+i).text(finalDate); //날짜
 				$("#location"+i).text(totalList[i].location); //장소 
 	            $("#maker"+i).text(totalList[i].maker); //작성자

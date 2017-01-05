@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+	window.addEventListener("load", function() {
+		setTimeout(scrollTo, 0, 0, 1);
+	}, false);
+	
 	// var filter = "win16|win32|win64|mac";
 
 	// if(navigator.platform){

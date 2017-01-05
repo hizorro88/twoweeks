@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	window.addEventListener("load", function() {
+		setTimeout(scrollTo, 0, 0, 1);
+	}, false);
+
 	function tokenCheck(){
 		if (!store.get("token")){
 			location.href="../index.html";
