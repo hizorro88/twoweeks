@@ -1,8 +1,28 @@
 $(document).ready(function () {
 
-	store.clear();
+	// var filter = "win16|win32|win64|mac";
+
+	// if(navigator.platform){
+	// 	if(0 > filter.indexOf(navigator.platform.toLowerCase())){
+	// 		console.log("mobile")
+	// 	}else{
+	// 		console.log("PC")
+	// 	}
+	// }
+
+	// store.clear();
+	store.remove("department");
+	store.remove("detailData");
+	store.remove("listData");
+	store.remove("url");
+	store.remove("userId");
+	store.remove("username");
 	store.set("url", "http://192.168.3.2:8000");
 	
+	if(store.get("token")){
+		location.href="/views/list.html"
+	}
+
 	$('#userId').val("010-");	
 
 	//id 입력하는 부분
@@ -60,17 +80,26 @@ $(document).ready(function () {
 				store.set("token", data.token);
 				store.set("department", data.department);
 				
+				//토큰관리를 위한 시간
+				var now = new Date();
+				var day = now.getDate();
+				var hour = now.getHours();
+				var min = now.getMinutes();
+				store.set("loginDate", day);
+				store.set("loginTime", hour*60 + min); // 시간 저장
+
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동
 					location.href="/views/loginUpdate.html"
 				} else {
 					//목록 화면으로 이동
 					location.href="/views/list.html"
-				}
+				}	
 			},
 			error: function(data, status, err) {
-				// console.log(status)
-				alert("아이디나 비밀번호를 확인하세요.")
+				console.log(data.status)
+
+				// alert("아이디나 비밀번호를 확인하세요.")
 				
 				$('#password').val("");
 				$('#userId').select();

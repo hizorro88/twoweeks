@@ -44,7 +44,7 @@ $(document).ready(function(){
 	var chan_val = year + '-' + mon + '-' + day + 'T12:00';
 	$("#meetingDate").val(chan_val);
 	
-	// 물음표 연속 2개를 막아야 함
+	// 물음표 연속 2개시 오류
 	$('#title').keyup(function(){
 		var str = $(this).val()
 		checkStr = str.indexOf('\?\?');

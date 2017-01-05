@@ -20,7 +20,7 @@ $(document).ready(function(){
 		checkStr = str.indexOf('\?\?');
 		if (checkStr != -1){
 			str = str.replace(/\?/, "");
-			// $(this).val(str);
+			$(this).val(str);
 		}
 	});
 
@@ -29,7 +29,7 @@ $(document).ready(function(){
 		checkStr = str.indexOf('\?\?');
 		if (checkStr != -1){
 			str = str.replace(/\?/, "");	
-			// $(this).val(str);
+			$(this).val(str);
 		}
 	});
 	
