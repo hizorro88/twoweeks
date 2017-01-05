@@ -1,7 +1,19 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #fff;
+}
+
+.alert {
+    background-color: #fff;
+}
+
+.form-signin #userId {
+    margin: 20px 0 20px 0;
+}
+
+.form-signin #password {
+    margin-bottom: 20px;
 }
 
 .form-signin {
