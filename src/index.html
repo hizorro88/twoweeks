@@ -12,8 +12,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="/css/common.css" rel="stylesheet">
     <link href="/css/signin.css" rel="stylesheet">
 
   </head>
@@ -22,8 +24,12 @@
 
     <div class="container">
 
+        <div class="text-center">
+            <img src="/img/ricetime.png" style="width:80%"/>
+        </div>
+
       <form class="form-signin" name="loginForm">
-        <h2 class="form-signin-heading">로그인</h2>
+        <!-- <h2 class="form-signin-heading">우리 같이 먹자 어때!</h2> -->
         <label for="userId" class="sr-only">ID</label>
         <input type="tel" id="userId" class="form-control" placeholder="휴대폰 번호" required autofocus>
         <label for="password" class="sr-only">Password</label>
@@ -33,16 +39,25 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>-->
-        
-        <a class="btn btn-lg btn-primary btn-block" type="submit" role="button" id="login">로그인</a>
+
+        <a class="btn btn-lg btn-orange btn-block" type="submit" role="button" id="login">
+            <strong><i class="fa fa-sign-in" aria-hidden="true"></i> 로그인 </strong>
+        </a>
 
       </form>
+      <div style="padding:15px;">
+          <div class="alert alert-danger alert-dismissible fade in text-center" role="alert">
+              <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+              <p><strong>처음 방문하신 분은 로그인 후</strong></p>
+              <p><strong>비밀번호를 변경하시기 바랍니다.</strong></p>
+          </div>
+      </div>
     </div> <!-- /container -->
 
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/lib/store-js/store.min.js"></script>
     <script src="/js/login.js"></script>
-    
+
   </body>
 </html>
