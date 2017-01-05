@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
+    <link href="../css/toast.css" rel="stylesheet">
 
   </head>
 
@@ -55,12 +56,12 @@
           <!-- <p class="form-control-static" id="meetingdate" style="padding-left: 10px; font-size: 15px"></p> -->
         </div>
       </div>
-      <!-- <div class="form-group row">
+      <div class="form-group row">
         <label for="category" class="col-md-2 col-form-label">범주</label>
         <div class="col-md-10">
-          <p class="form-control-static" id="category" style="padding-left: 10px; font-size: 15px"></p>
+          <input class="form-control" type="text" id="category" readonly="readonly">
         </div>
-      </div> -->
+      </div>
       <div class="form-group row">
         <label for="contents" class="col-md-2 col-form-label">내용</label>
         <div class="col-md-10">
@@ -68,9 +69,15 @@
         </div>
       </div>
       <div class="form-group row" id="attendQ">
-        <label for="attendBtn" class="col-md-2 col-form-label">참석하시겠습니까?</label>
+        <label for="attendBtn" class="col-md-2 col-form-label">참석여부</label>
         <div class="col-md-10">
-          <a class="btn btn-sm btn-primary" role="button" id="attendBtn">네</a>
+          <a class="btn btn-sm btn-primary btn-block" role="button" id="attendBtn">참석하기</a>
+        </div>
+      </div>
+      <div class="form-group row" id="attendN">
+        <label for="attendBtnN" class="col-md-2 col-form-label">참석여부</label>
+        <div class="col-md-10">
+          <a class="btn btn-sm btn-primary btn-block" role="button" id="attendBtnN">불참하기</a>
         </div>
       </div>
       <div class="form-group row">
@@ -85,6 +92,8 @@
         <a class="btn btn-primary" role="button" id="list">목록</a>
       </div>
     
+    <!-- <div id="attendYes">"참석" 으로 변경되었습니다.</div>
+    <div id="attendNo">"불참" 으로 변경되었습니다.</div> -->
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/store-js/store.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>

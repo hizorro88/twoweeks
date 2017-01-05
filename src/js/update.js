@@ -11,9 +11,28 @@ $(document).ready(function(){
 	$("#title").val(detailData.title);
 	$("#place").val(detailData.location);
 	$("#meetingDate").val(detailData.meetingDate);
-	// $("#category").val(detailData.category);
+	$("#category").val(detailData.category);
 	$("#contents").val(detailData.content);
 
+	//물음표 연속 2개를 막아야 함
+	$('#title').keyup(function(){
+		var str = $(this).val()
+		checkStr = str.indexOf('\?\?');
+		if (checkStr != -1){
+			str = str.replace(/\?/, "");
+			// $(this).val(str);
+		}
+	});
+
+	$('#contents').keyup(function(){
+		var str = $(this).val()
+		checkStr = str.indexOf('\?\?');
+		if (checkStr != -1){
+			str = str.replace(/\?/, "");	
+			// $(this).val(str);
+		}
+	});
+	
 	// 작성버튼 클릭 시, 서버에 정보를 보내고 상세 화면으로 이동
 	$('#submit').click(function(){
 		
@@ -39,6 +58,7 @@ $(document).ready(function(){
 					team: detailData.team,	
 					title: $('#title').val(),
 					location: $('#location').val(),
+					category: $('#category').val(),
 					meetingDate: $('#meetingDate').val(),
 					content: $('#contents').val()
 				}),

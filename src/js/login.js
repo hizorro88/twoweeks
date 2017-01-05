@@ -2,6 +2,8 @@ $(document).ready(function () {
 
 	store.clear();
 	store.set("url", "http://192.168.3.2:8000");
+	
+	$('#userId').val("010-");	
 
 	//id 입력하는 부분
 	$('#userId').keyup(function(){
@@ -56,6 +58,7 @@ $(document).ready(function () {
 				store.set("userId", id);
 				store.set("username", data.username);
 				store.set("token", data.token);
+				store.set("department", data.department);
 				
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동
@@ -66,11 +69,11 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data, status, err) {
-
+				// console.log(status)
 				alert("아이디나 비밀번호를 확인하세요.")
-				$('#userId').val("");
+				
 				$('#password').val("");
-				$('#userId').focus();
+				$('#userId').select();
 			}
 		});
 	});

@@ -25,7 +25,7 @@
       <form class="form-signin" name="loginForm">
         <h2 class="form-signin-heading">로그인</h2>
         <label for="userId" class="sr-only">ID</label>
-        <input type="tel" id="userId" class="form-control" placeholder="휴대폰 번호" required autofocus>
+        <input type="tel" id="userId" class="form-control" placeholder="휴대폰 번호" maxlength="13" required autofocus>
         <label for="password" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" placeholder="초기 비밀번호 1234" required>
         <!--<div class="checkbox">
@@ -39,6 +39,9 @@
       </form>
     </div> <!-- /container -->
 
+    <!-- <footer>
+      <h4>KT 플랫폼사업기획실</h4>
+    </footer> -->
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/lib/store-js/store.min.js"></script>
