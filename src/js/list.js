@@ -56,6 +56,11 @@ $(document).ready(function(){
 	        }
 		}
 	});
+	
+	$('#logout').click(function(){
+		store.clear();
+		location.href="../index.html";
+	});
 
 	//조건에 맞는 ID 를 가진 것들은 보이게 하고 나머지는 보이지 않게 하기
 	$("#selectBox").change(function(){
