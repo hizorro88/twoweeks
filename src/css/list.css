@@ -1,7 +1,26 @@
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: #eee;
+  /*padding-top: 20px;
+  padding-bottom: 20px;*/
+
+  padding-top:50px;
+  background-color: #fff;
+}
+
+.label-G {
+    background-color: #5cb85c;
+}
+
+.label-W {
+    background-color: #5bc0de;
+}
+
+.label-B {
+    background-color: #f0ad4e;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+    border-color: #cd0c0c;
 }
 
 .form-signin {

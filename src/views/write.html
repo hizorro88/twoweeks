@@ -12,16 +12,46 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/common.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
 
   </head>
 
   <body>
-    <div class="container">
-      
-      <h1>Rice Time 등록</h1>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xs-4"  style="padding:10px 0 0 15px;">
+                      <button class="btn btn-sm btn-warning" id="logout"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 취소</strong></button>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <img src="/img/ricetime_s.png" style="width:50%"/>
+                  </div>
+                  <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
+                      <button class="btn btn-sm btn-success" id="logout"><strong>등록 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+          </div>
+      </nav>
 
-      <div class="form-group row">
+
+    <div class="container">
+
+
+        <div class="row" style="margin:20px 0">
+            <div class="col-xs-6">
+                <strong><i class="fa fa-user" aria-hidden="true"></i> 주선자 : 김상열</strong>
+            </div>
+            <div class="col-xs-6 text-right">
+                <strong>플랫폼사업개발팀</strong>
+            </div>
+        </div>
+
+      <!-- <h1>Rice Time 등록</h1> -->
+
+      <!-- <div class="form-group row">
         <label for="name" class="col-md-2 col-form-label">작성자</label>
         <div class="col-md-10">
           <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p>
@@ -30,18 +60,73 @@
       <div class="form-group row">
         <label for="team" class="col-md-2 col-form-label">팀</label>
         <div class="col-md-10">
-          <p class="form-control-static" id="team" style="padding-left: 10px; font-size: 15px"></p>
+          <p class="form-control-static" id="team" style="padding-left: 10px; font-size: 15px"></p> -->
           <!-- <input class="form-control" type="text" placeholder="예시) 소프트웨어개발센터 플랫폼사업개발팀" id="team" maxlength="25" autofocus required> -->
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
+
+
       <div class="form-group row">
-        <label for="title" class="col-md-2 col-form-label">제목</label>
-        <div class="col-md-10">
+        <!-- <label for="title" class="col-md-2 col-form-label">제목</label> -->
+        <!-- <div class="col-md-10">
           <input class="form-control" type="text" placeholder="예시) 광화문에서 한께 식사하실분~?" id="title" maxlength="50" required>
+        </div> -->
+        <div class="col-md-12">
+          <input class="form-control" type="text" placeholder="제목" id="title" maxlength="50" required>
         </div>
       </div>
-      
-      <div class="form-group row">
+
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="option1" checked>
+                      </div>
+                      <span class="label label-G">광화문</span>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="option1">
+                      </div>
+                      <span class="label label-W">우면동</span>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="option1">
+                      </div>
+                      <span class="label label-B">분당</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="foodType" id="inlineRadio1" value="option1" checked>
+                      </div>
+                      <img alt="50x50" data-src="holder.js/140x140" class="img-circle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTk2ZjE5MTBmMSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1OTZmMTkxMGYxIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="foodType" id="inlineRadio1" value="option1">
+                      </div>
+                      <img alt="50x50" data-src="holder.js/140x140" class="img-circle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTk2ZjE5MTBmMSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1OTZmMTkxMGYxIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="foodType" id="inlineRadio1" value="option1">
+                      </div>
+                      <img alt="50x50" data-src="holder.js/140x140" class="img-circle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTk2ZjE5MTBmMSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1OTZmMTkxMGYxIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- <div class="form-group row">
         <label for="location" class="col-md-2 col-form-label">장소</label>
         <div class="col-md-10">
           <select class="form-control" id="location">
@@ -60,20 +145,29 @@
               <input type="radio" name="location">분당
             </label>
         </div>
+<<<<<<< HEAD
 
 
 
 
       </div>
+=======
+      </div> -->
+>>>>>>> 7940c03fb837d0703da588979c78edec38a490d7
 
-      <div class="form-group row">
-        <label for="meetingDate" class="col-md-2 col-form-label">만남일</label>
-        <div class="col-md-10">
+      <div class="row" style="margin-bottom:20px;">
+        <!-- <label for="meetingDate" class="col-md-2 col-form-label">만남일</label> -->
+        <!-- <div class="col-md-10">
+          <input class="form-control" type="datetime-local" id="meetingDate">
+        </div> -->
+        <div class="col-md-12">
           <input class="form-control" type="datetime-local" id="meetingDate">
         </div>
       </div>
 
-      <div class="form-group row">
+
+
+      <!-- <div class="form-group row">
         <label for="category" class="col-md-2 col-form-label">범주</label>
         <div class="col-md-10">
           <select class="form-control" id="category">
@@ -82,11 +176,11 @@
             <option>커피</option>
           </select>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group row">
-        <label for="contents" class="col-md-2 col-form-label">내용</label>
-        <div class="col-md-10">
+        <!-- <label for="contents" class="col-md-2 col-form-label">내용</label> -->
+        <div class="col-md-12">
           <textarea class="form-control" rows="5" id="contents" maxlength="250" required>
 식당이름:
 메뉴:
@@ -94,15 +188,15 @@
         </div>
       </div>
 
-      <div class="form-group pull-right">
+      <!-- <div class="form-group pull-right">
         <a class="btn btn-primary" role="button" id="submit">등록</a>
         <a href="list.html" class="btn btn-primary" role="button">취소</a>
-      </div>
-      
+      </div> -->
+
     <script src="../lib/jquery/dist/jquery.js"></script>
     <script src="../lib/store-js/store.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../js/common.js"></script>
+    <!-- <script src="../js/common.js"></script> -->
     <script src="../js/write.js"></script>
 
   </body>

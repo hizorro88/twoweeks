@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	
+
 	var totalList;	//받아온 데이터를 저장할 변수
 	var listLen;	//받아온 데이터 객체의 수
 
 	$.ajax({
 		url: store.get("url")+'/ricetimes/',
-		// url: '../../dummy.json',
+		 //url: '../dummy.json',
 		headers: {
         	'Content-Type':'application/json',
         	'x-auth-token':store.get("token")
@@ -34,7 +34,7 @@ $(document).ready(function(){
 												"<span class='glyphicon glyphicon-map-marker' style='padding:0px 5px 0px 0px;'></span>"+ //장소
 												"<span id='location"+i+"' style='padding:0px 10px 0px 0px;'></span>"+
 												"<span class='glyphicon glyphicon-user' style='padding:0px 5px 0px 0px;'></span>"+ //작성자
-												"<span id='maker"+i+"' style='padding:0px 10px 0px 0px;'></span>"+ 
+												"<span id='maker"+i+"' style='padding:0px 10px 0px 0px;'></span>"+
 											"</div>"+
 										"</div>")
 				.find('.panel').bind('click',function(e){
@@ -56,13 +56,14 @@ $(document).ready(function(){
 				
 				var date = totalList[i].meetingDate;
 				var finalDate = date.substring(0, 10) +" "+ date.substring(11, 16);
+
 	            $("#meetingDate"+i).text(finalDate); //날짜
-				$("#location"+i).text(totalList[i].location); //장소 
+				$("#location"+i).text(totalList[i].location); //장소
 	            $("#maker"+i).text(totalList[i].maker); //작성자
 	        }
 		}
 	});
-	
+
 	$('#logout').click(function(){
 		store.clear();
 		location.href="../index.html";
