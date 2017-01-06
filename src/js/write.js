@@ -7,11 +7,11 @@ $(document).ready(function(){
 		var sendData = JSON.stringify({
 					userId: userId,
 					maker: username,
-					team: username,
+					team: team,
 					title: $('#title').val(),
 					meetingDate: $('#meetingDate').val(),
-					category: //$('#category').val(),
-					location: //$('#location').val(),
+					category: $('input:radio[name="category"]:checked').val(),
+					location: $('input:radio[name="location"]:checked').val(),
 					content: $('#contents').val()
 				})
 
@@ -27,7 +27,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: sendData,
 			success: function(data) {
-				console.log("성공")
+				alert("만남이 등록되었습니다.");
 				//history.back()
 				location.href = "/views/list.html";
 			}
@@ -35,7 +35,7 @@ $(document).ready(function(){
 	}
 
 	//기본 정보 세팅
-	$("#name").text(username);
+	$("#name").text(" "+username);
 	$("#team").text(team);
 	var now = new Date();
 	var year= now.getFullYear();
@@ -79,6 +79,6 @@ $(document).ready(function(){
 
 	// 취소버튼 클릭 시, 이전 화면으로 이동
 	$('#back').click(function(){
-		history.back()
+		location.href = "/views/list.html";
 	});
 });

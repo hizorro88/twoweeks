@@ -22,7 +22,6 @@ $(document).ready(function(){
 			//참가자 데이터
 			attendData = detailData.joinRiceTime;
 			attendDataLength = attendData.length;
-
 			//참가자, 기본 폼 세팅
 			attendSetting();
 			formSetting();
@@ -49,11 +48,26 @@ $(document).ready(function(){
 
 	function formSetting(){
 		// 이름, 팀, 제목, 위치, 만남일, 내용
-		$("#name").val(detailData.maker + '   (tel: ' + detailData.userId + ')');
-		$("#team").val(detailData.team);
+		$("#name").text(detailData.maker) //+ '   (tel: ' + detailData.userId + ')');
+		$("#team").text(detailData.team);
 		$("#title").val(detailData.title);
 		$("#location").val(detailData.location);
-		$("#meetingdate").val(detailData.meetingDate);
+
+		//날짜 정보 수정
+    	var date = detailData.meetingDate;
+    	var time = date.substring(11, 13);
+    	var newTime;
+    	var dateStr;
+    	if (Number(time) > 12){
+			dateStr = "오후";
+			newTime = Number(time) - 12;
+    	} else {
+    		dateStr = "오전";
+    		newTime = Number(time);
+    	}
+		var finalDate = date.substring(0, 10) +" "+dateStr+" "+newTime+ date.substring(13, 16);
+
+		$("#meetingdate").text(finalDate);
 		$("#category").val(detailData.category);
 		$("#contents").val(detailData.content);
 
@@ -175,6 +189,7 @@ $(document).ready(function(){
 			type: 'DELETE',
 			dataType: 'json',
 			complete: function(data) {
+				alert("만남이 삭제되었습니다.");
 				location.href="/views/list.html"
 			}
 		});

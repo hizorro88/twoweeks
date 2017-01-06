@@ -44,6 +44,12 @@ $(document).ready(function(){
 		}
 	});
 
+	history.pushState(null, null, location.href); 
+	window.onpopstate = function(event) { 
+		store.remove("token") //토큰 삭제
+		location.href="../index.html"
+	}
+
 	$("#back").click(function(){
 		store.remove("token") //토큰 삭제
 		location.href="../index.html"

@@ -1,18 +1,12 @@
 $(document).ready(function () {
 
-	window.addEventListener("load", function() {
-		setTimeout(scrollTo, 0, 0, 1);
-	}, false);
+	//스크롤 올리기
+	// window.addEventListener("load", function() {
+	// 	document.body.style.height = (document.documentElement.clientHeight + 5) + 'px';
+	// 	setTimeout(scrollTo, 0, 0, 1);
+	// }, false);
 	
-	// var filter = "win16|win32|win64|mac";
-
-	// if(navigator.platform){
-	// 	if(0 > filter.indexOf(navigator.platform.toLowerCase())){
-	// 		console.log("mobile")
-	// 	}else{
-	// 		console.log("PC")
-	// 	}
-	// }
+	// var userAgent = navigator.userAgent.toLowerCase();
 
 	// store.clear();
 	store.remove("department");
@@ -101,12 +95,17 @@ $(document).ready(function () {
 				}	
 			},
 			error: function(data, status, err) {
-				console.log(data.status)
 
-				// alert("아이디나 비밀번호를 확인하세요.")
-				
-				$('#password').val("");
-				$('#userId').select();
+				if (data.status == 403){
+					alert("비밀번호를 확인하세요.");
+					$('#password').val("");
+					$('#password').focus();	
+				} else if (data.status == 404){ //id 없는 것
+					alert("정확한 휴대폰번호를 입력하세요.");
+					$('#userId').val("010-");
+					$('#password').val("");
+					$('#userId').focus();
+				}
 			}
 		});
 	});

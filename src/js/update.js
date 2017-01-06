@@ -1,17 +1,19 @@
 $(document).ready(function(){
 	
-	// detail 에서 저장된 정보를 미리 폼에 세팅 후 출력	
+	// detail 에서 저장된 정보를 미리 폼에 세팅 후 출력
 	var detailData = store.get("detailData");
 	var riceTimeId = store.get("riceTimeId");
 	var userId = store.get("userId");
 	var username = store.get("username");
 
-	$("#name").val(detailData.maker);
-	$("#team").val(detailData.team);
+	$("#name").text(detailData.maker);
+	$("#team").text(detailData.team);
 	$("#title").val(detailData.title);
-	$("#place").val(detailData.location);
+
+	$('input:radio[name="location"][value="'+detailData.location+'"]').prop('checked', true);
+	$('input:radio[name="category"][value="'+detailData.category+'"]').prop('checked', true);
+	
 	$("#meetingDate").val(detailData.meetingDate);
-	$("#category").val(detailData.category);
 	$("#contents").val(detailData.content);
 
 	//물음표 연속 2개를 막아야 함
@@ -57,12 +59,13 @@ $(document).ready(function(){
 					maker: username,
 					team: detailData.team,	
 					title: $('#title').val(),
-					location: $('#location').val(),
-					category: $('#category').val(),
+					location: $('input:radio[name="location"]:checked').val(),
+					category: $('input:radio[name="category"]:checked').val(),
 					meetingDate: $('#meetingDate').val(),
 					content: $('#contents').val()
 				}),
 				success: function(data) {
+					alert("만남이 수정되었습니다.");
 					location.href="/views/detail.html";
 				}
 			});

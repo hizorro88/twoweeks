@@ -24,7 +24,7 @@ $(document).ready(function(){
 	        	var colorInfo;
 	        	if (totalList[i].location == '광화문'){
 	        		colorInfo = '5cb85c';
-	        	} else if (totalList[i].location == '우면'){
+	        	} else if (totalList[i].location == '우면동'){
 	        		colorInfo = '5bc0de';
 	        	} else {
 	        		colorInfo = 'f0ad4e';
@@ -44,6 +44,15 @@ $(document).ready(function(){
 	        	}
 				var finalDate = date.substring(0, 10) +" "+dateStr+" "+newTime+ date.substring(13, 16);
 
+				//제목 정보 수정
+				var subtitle = totalList[i].title;
+				var retitle;
+				if (subtitle.length > 15){
+					retitle = subtitle.substring(0, 16) + "..."; //제목
+				} else {
+					retitle = subtitle;
+				}
+
     	        $("#panelGroup").append(
 		            "<div class='col-xs-12' id='panel"+i+"'>"+
 		                "<div class='panel panel-default' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
@@ -55,7 +64,7 @@ $(document).ready(function(){
 		                            "<div class='col-xs-10 text-center'>"+
 		                                "<div class='row'>"+
 		                                    "<div class='col-xs-12 text-left' style='padding-left:30px;'>"+
-		                                        "<p style='font-size:16px;'><strong>"+totalList[i].title+"</strong></p>"+
+		                                        "<p style='font-size:16px;'><strong>"+retitle+"</strong></p>"+
 		                                    "</div>"+
 		                                "</div>"+
 		                                "<div class='row' style='margin-bottom:0px'>"+
@@ -101,12 +110,7 @@ $(document).ready(function(){
 				
 				// 	 <div class="panel-footer">Panel footer</div>
 				
-				// var subtitle = totalList[i].title;
-				// if (subtitle.length > 42){
-				// 	$("#"+totalList[i].riceTimeId).text(subtitle.substring(0, 42) + "..."); //제목
-				// } else {
-				// 	$("#"+totalList[i].riceTimeId).text(subtitle); //제목
-				// }
+				
 	   //          $("#meetingDate"+i).text(finalDate); //날짜
 				// $("#location"+i).text(totalList[i].location); //장소
 	   //          $("#maker"+i).text(totalList[i].maker); //작성자
