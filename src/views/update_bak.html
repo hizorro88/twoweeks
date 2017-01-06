@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Rice Time 수정</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/list.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div class="container">
+      
+      <h1>Rice Time 수정</h1>
+
+      <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">작성자</label>
+        <div class="col-md-10">
+          <input class="form-control" type="text" id="name" readonly="readonly">
+          <!-- <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p> -->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="team" class="col-md-2 col-form-label">팀</label>
+        <div class="col-md-10">
+          <input class="form-control" type="text" id="team" readonly="readonly">
+          <!-- <p class="form-control-static" id="team" style="padding-left: 10px; font-size: 15px"></p> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="title" class="col-md-2 col-form-label">제목</label>
+        <div class="col-md-10">
+          <input class="form-control" type="text" maxlength="50" id="title" autofocus required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="location" class="col-md-2 col-form-label">장소</label>
+        <div class="col-md-10">
+          <select class="form-control" id="location">
+            <option>광화문</option>
+            <option>양재</option>
+            <option>분당</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="meetingDate" class="col-md-2 col-form-label">만남일</label>
+        <div class="col-md-10">
+          <input class="form-control" type="datetime-local" id="meetingDate">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="category" class="col-md-2 col-form-label">범주</label>
+        <div class="col-md-10">
+          <select class="form-control" id="category">
+            <option>밥</option>
+            <option>술</option>
+            <option>커피</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="contents" class="col-md-2 col-form-label">내용</label>
+        <div class="col-md-10">
+          <textarea class="form-control" rows="5" maxlength="250" id="contents"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group pull-right">
+        <a href="#" class="btn btn-primary" role="button" id="submit">확인</a>
+        <a href="#" class="btn btn-primary" role="button" id="back">취소</a>
+      </div>
+      
+    </div>
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/store-js/store.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/update.js"></script>
+
+  </body>
+</html>
