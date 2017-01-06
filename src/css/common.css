@@ -55,3 +55,8 @@ fieldset[disabled] .btn-orange.focus {
   color: #f03602;
   background-color: #fff;
 }
+
+.navbar-inverse {
+    background-color: #fff;
+    border-color: #cd0c0c;
+}
