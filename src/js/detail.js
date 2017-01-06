@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var detailData;	//상세 데이터(전체)
 	var attendData;	//참가자 데이터
 	var attendDataLength; // 데이터 길이
-	
+
 	$.ajax({
 		url: store.get("url")+"/ricetimes/" + riceTimeId,
 		async: false, //결과값 전역변수에 넣어 두기
@@ -31,27 +31,60 @@ $(document).ready(function(){
 	function attendSetting(){
 		//참가자 세팅
 		for(var i=0; i<attendDataLength; i++){
-			
-			$("#attendList").append("<a class='btn btn-sm btn-primary' id='"+ attendData[i].userId +"'></a>&nbsp;"); 
+			$("#attendList").append("<span class='label label-invite' id='"+ attendData[i].userId +"'></span>");
+
+			// $("#attendList").append("<a class='btn btn-sm btn-primary' id='"+ attendData[i].userId +"'></a>&nbsp;"); 
 
 			//true / false 따라서 초기 색상 변경
 			if (attendData[i].join == "true"){
-				$("#"+attendData[i].userId).attr("class", "btn btn-sm btn-primary");	
+				$("#"+attendData[i].userId).attr("class", "label label-invite");	
 			} else {
-				$("#"+attendData[i].userId).attr("class", "btn btn-sm btn-danger");
+				$("#"+attendData[i].userId).attr("class", "label label-notinvite");
 			}
+
 			//참가자 이름 표시
-			// console.log(attendData[i].joiner);
             $("#"+attendData[i].userId).text(attendData[i].joiner);
         }
 	}
 
 	function formSetting(){
+
+		var imageInfo;
+    	if (detailData.category == '밥'){
+    		imageInfo = 'plate_50x50.png';
+    	} else if (detailData.category == '술'){
+    		imageInfo = 'beer_50x50.png';
+    	} else {
+    		imageInfo = 'coffee_50x50.png';
+    	}
+
+    	//컬러 정보 결정
+    	var colorInfo;
+    	if (detailData.location == '광화문'){
+    		colorInfo = 'label-G';
+    	} else if (detailData.location == '우면동'){
+    		colorInfo = 'label-W';
+    	} else {
+    		colorInfo = 'label-B';
+    	}
+
+		$("#makeImage").append(
+		            "<div class='col-xs-2 text-right'>"+
+		                "<img src='/img/"+imageInfo+"'>"+
+		            "</div>"+
+		            "<div class='col-xs-10 text-right'>"+
+		                "<div class='row'>"+
+		                    "<div class='col-xs-12 text-right'>"+
+		                        "<h4><span class='label "+colorInfo+"' id='location'></span></h4>"+
+		                        "<h5><strong><i class='fa fa-clock-o' aria-hidden='true'></i> <span id=meetingdate></span></strong></h5>"+
+		                    "</div>"+
+		                "</div>"+
+		            "</div>");
+
 		// 이름, 팀, 제목, 위치, 만남일, 내용
-		$("#name").text(detailData.maker) //+ '   (tel: ' + detailData.userId + ')');
+		$("#name").text(detailData.maker);
 		$("#team").text(detailData.team);
-		$("#title").val(detailData.title);
-		$("#location").val(detailData.location);
+		$("#title").text(detailData.title);
 
 		//날짜 정보 수정
     	var date = detailData.meetingDate;
@@ -68,8 +101,11 @@ $(document).ready(function(){
 		var finalDate = date.substring(0, 10) +" "+dateStr+" "+newTime+ date.substring(13, 16);
 
 		$("#meetingdate").text(finalDate);
-		$("#category").val(detailData.category);
 		$("#contents").val(detailData.content);
+
+		
+
+		$("#location").text(detailData.location);
 
 		//본인 아이디와 글의 아이디가 같은 경우(본인이 작성한 글인 경우)
 		if (userId === detailData.userId){
@@ -138,11 +174,11 @@ $(document).ready(function(){
 					if(data.join == "true"){
 						$("#attendQ").hide();
 						$("#attendN").show();
-						$("#" + joinerId).attr("class", "btn btn-sm btn-primary");
+						$("#" + joinerId).attr("class", "label label-invite");
 					} else {
 						$("#attendQ").show();
 						$("#attendN").hide();
-						$("#" + joinerId).attr("class", "btn btn-sm btn-danger");	
+						$("#" + joinerId).attr("class", "label label-notinvite");	
 					}
 					// location.reload();//화면 갱신
 				}
@@ -195,6 +231,11 @@ $(document).ready(function(){
 		});
 	});
 
+
+	$("#update").click(function(){
+		location.href="/views/update.html"
+	});
+	
 	// 목록 버튼 클릭 시
 	$('#list').click(function(){
 		// store.remove("detaildata");

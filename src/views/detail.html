@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimun-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
@@ -60,10 +60,10 @@
 
         <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd">
             <div class="col-xs-6">
-                <button class="btn btn-sm btn-danger" id="logout"><strong><i class="fa fa-times" aria-hidden="true"></i> 삭제</strong></button>
+                <button class="btn btn-sm btn-danger" id="delete"><strong><i class="fa fa-times" aria-hidden="true"></i> 삭제</strong></button>
             </div>
             <div class="col-xs-6 text-right">
-                 <button class="btn btn-sm btn-success" id="logout"><strong>수정 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                 <button class="btn btn-sm btn-success" id="update"><strong>수정 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -78,65 +78,24 @@
 
         <div class="row" style="margin-top:20px;margin-bottom:10px;">
             <div class="col-xs-12">
-                <h4><strong>오늘 시간되시는분</strong></h4>
+                <h4><strong><span id="title"></span></strong></h4>
             </div>
         </div>
 
-        <div class="row" style="margin-bottom:10px;">
-            <div class="col-xs-2 text-right">
+        <div class="row" style="margin-bottom:10px;" id="makeImage">
+            <!-- <div class="col-xs-2 text-right">
                 <img src="/img/plate_50x50.png">
             </div>
             <div class="col-xs-10 text-right">
                 <div class="row">
                     <div class="col-xs-12 text-right">
-                        <h4><span class="label label-G">광화문</span></h4>
+                        <h4><span class="label label-G" id="location">광화문</span></h4>
                         <h5><strong><i class="fa fa-clock-o" aria-hidden="true"></i> <span id=meetingdate></span></strong></h5>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
-
-      <!-- <div class="form-group row">
-        <label for="name" class="col-md-2 col-form-label">작성자</label>
-        <div class="col-md-10">
-          <input class="form-control" type="text" id="name" readonly="readonly">
-          <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="team" class="col-md-2 col-form-label">팀</label>
-        <div class="col-md-10">
-          <input class="form-control" type="text" id="team" readonly="readonly">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="title" class="col-md-2 col-form-label">제목</label>
-        <div class="col-md-10">
-          <input class="form-control" type="text" id="title" readonly="readonly">
-          <p class="form-control-static" id="title" style="padding-left: 10px; font-size: 15px"></p>
-        </div>
-      </div> -->
-      <!-- <div class="form-group row">
-        <label for="place" class="col-md-2 col-form-label">장소</label>
-        <div class="col-md-10">
-          <input class="form-control" type="text" id="location" readonly="readonly">
-          <p class="form-control-static" id="location" style="padding-left: 10px; font-size: 15px"></p>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="meetDay" class="col-md-2 col-form-label">만남일</label>
-        <div class="col-md-10">
-          <input class="form-control" type="datetime-local" id="meetingdate" readonly="readonly">
-          <p class="form-control-static" id="meetingdate" style="padding-left: 10px; font-size: 15px"></p>
-        </div>
-      </div> -->
-      <!-- <div class="form-group row">
-        <label for="category" class="col-md-2 col-form-label">범주</label>
-        <div class="col-md-10">
-          <input class="form-control" type="text" id="category" readonly="readonly">
-        </div>
-      </div> -->
       <div class="form-group row">
         <!-- <label for="contents" class="col-md-2 col-form-label">내용</label> -->
         <div class="col-md-10">
@@ -175,24 +134,14 @@
       <p>참석자명단</p>
       <div class="panel panel-default">
           <div class="panel-body">
-
               <div class="row">
-                  <div class="col-xs-12">
-                      <span class="label label-invite">김상열</span>
-                      <span class="label label-invite">장원철</span>
+                  <div class="col-xs-12" id="attendList">
+                      
                   </div>
               </div>
           </div>
       </div>
 
-      <!-- <div class="form-group pull-right">
-        <a href="/views/update.html" class="btn btn-primary" role="button" id="update">수정</a>
-        <a class="btn btn-primary" role="button" id="delete">삭제</a>
-        <a class="btn btn-primary" role="button" id="list">목록</a>
-      </div> -->
-
-    <!-- <div id="attendYes">"참석" 으로 변경되었습니다.</div>
-    <div id="attendNo">"불참" 으로 변경되었습니다.</div> -->
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/store-js/store.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>

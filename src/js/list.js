@@ -23,11 +23,20 @@ $(document).ready(function(){
 	        	//컬러 정보 결정
 	        	var colorInfo;
 	        	if (totalList[i].location == '광화문'){
-	        		colorInfo = '5cb85c';
+	        		colorInfo = 'd9534f';
 	        	} else if (totalList[i].location == '우면동'){
 	        		colorInfo = '5bc0de';
 	        	} else {
 	        		colorInfo = 'f0ad4e';
+	        	}
+
+	        	var imageInfo;
+	        	if (totalList[i].category == '밥'){
+	        		imageInfo = 'plate_50x50.png';
+	        	} else if (totalList[i].category == '술'){
+	        		imageInfo = 'beer_50x50.png';
+	        	} else {
+	        		imageInfo = 'coffee_50x50.png';
 	        	}
 
 	        	//날짜 정보 수정
@@ -59,7 +68,7 @@ $(document).ready(function(){
 		                    "<div class='panel-body' style='padding-bottom:0px;' id='"+totalList[i].riceTimeId+"'>"+
 		                        "<div class='row'>"+
 		                            "<div class='col-xs-2 text-center'>"+
-		                                "<img alt='50x50' data-src='holder.js/140x140' class='img-circle' src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTk2ZjE5MTBmMSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1OTZmMTkxMGYxIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=' data-holder-rendered='true' style='width: 50px; height: 50px;'>"+
+		                                "<img src='../img/"+imageInfo+"'>"+
 		                            "</div>"+
 		                            "<div class='col-xs-10 text-center'>"+
 		                                "<div class='row'>"+
@@ -69,12 +78,12 @@ $(document).ready(function(){
 		                                "</div>"+
 		                                "<div class='row' style='margin-bottom:0px'>"+
 		                                    "<div class='col-xs-12 text-right'>"+
-		                                        "<p style='font-size:12px;margin-bottom:0px;'><strong><i class='fa fa-clock-o' aria-hidden='true'></i>"+finalDate+"</strong></p>"+
+		                                        "<p style='font-size:12px;margin-bottom:0px;'><strong><i class='fa fa-clock-o' aria-hidden='true'></i>&nbsp;"+finalDate+"</strong></p>"+
 		                                    "</div>"+
 		                                "</div>"+
 		                                "<div class='row'>"+
 		                                    "<div class='col-xs-12 text-right'>"+
-		                                         "<p style='font-size:12px;margin-bottom:0px;'><strong><i class='fa fa-user' aria-hidden='true'></i>"+totalList[i].maker+"</strong></p>"+
+		                                         "<p style='font-size:12px;margin-bottom:0px;'><strong><i class='fa fa-user' aria-hidden='true'></i>&nbsp;"+totalList[i].maker+"</strong></p>"+
 		                                    "</div>"+
 		                                "</div>"+
 		                            "</div>"+
@@ -89,38 +98,8 @@ $(document).ready(function(){
 					store.set("riceTimeId", riceTimeId);
 					location.href="/views/detail.html";
 				});
-
-
-
-				// $("#panelGroup").append("<div class='panel panel-primary' id='panel"+i+"'>"+
-				// 							"<div class='panel-heading' style='min-height: 50px; max-height: 50px; vertical-align: middle;'>"+
-				// 								"<h4 class='panel-title'>"+
-				// 									"<span id='"+totalList[i].riceTimeId+"' style='padding:0px 10px 0px 0px;'></span>"+
-				// 								"</h4>"+
-				// 							"</div>"+
-				// 							"<div class='panel-body'>"+
-				// 								"<span class='glyphicon glyphicon-time' style='padding:0px 5px 0px 0px;'></span>"+ //날짜
-				// 								"<span id='meetingDate"+i+"' style='padding:0px 10px 0px 0px;'></span>"+
-				// 								"<span class='glyphicon glyphicon-map-marker' style='padding:0px 5px 0px 0px;'></span>"+ //장소
-				// 								"<span id='location"+i+"' style='padding:0px 10px 0px 0px;'></span>"+
-				// 								"<span class='glyphicon glyphicon-user' style='padding:0px 5px 0px 0px;'></span>"+ //작성자
-				// 								"<span id='maker"+i+"' style='padding:0px 10px 0px 0px;'></span>"+
-				// 							"</div>"+
-				// 						"</div>")
-				
-				// 	 <div class="panel-footer">Panel footer</div>
-				
-				
-	   //          $("#meetingDate"+i).text(finalDate); //날짜
-				// $("#location"+i).text(totalList[i].location); //장소
-	   //          $("#maker"+i).text(totalList[i].maker); //작성자
 	        }
 		}
-	});
-
-	$('#logout').click(function(){
-		store.clear();
-		location.href="../index.html";
 	});
 
 	//조건에 맞는 ID 를 가진 것들은 보이게 하고 나머지는 보이지 않게 하기

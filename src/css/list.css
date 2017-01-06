@@ -24,6 +24,12 @@ body {
     color: #000;
     font-size: 100%;
 }
+.label-notinvite {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #FF0000;
+    font-size: 100%;
+}
 
 .form-signin {
   max-width: 330px;

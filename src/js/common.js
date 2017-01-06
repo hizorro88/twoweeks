@@ -3,6 +3,10 @@ $(document).ready(function(){
 	// window.addEventListener("load", function() {
 	// 	setTimeout(scrollTo, 0, 0, 1);
 	// }, false);
+	$('#logout').click(function(){
+		store.clear();
+		location.href="../index.html";
+	});
 
 	function tokenCheck(){
 		if (!store.get("userId") || !store.get("username") || !store.get("department") || !store.get("url")){
