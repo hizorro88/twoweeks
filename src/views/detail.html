@@ -12,21 +12,70 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/common.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
     <link href="../css/toast.css" rel="stylesheet">
 
   </head>
 
   <body>
-    <div class="container">
-      
-      <h1>Rice Time 상세</h1>
 
-      <div class="form-group row">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xs-4"  style="padding:10px 0 0 15px;">
+                      <button class="btn btn-sm btn-warning" id="logout"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 목록</strong></button>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <img src="/img/ricetime_s.png" style="width:50%"/>
+                  </div>
+                  <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
+                      <button class="btn btn-sm btn-success" id="logout"><strong>수정 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+          </div>
+      </nav>
+
+
+    <div class="container">
+
+        <div class="row" style="margin-top:20px;margin-bottom:20px;">
+            <div class="col-xs-6">
+                <strong><i class="fa fa-user" aria-hidden="true"></i> 주선자 : 김상열</strong>
+            </div>
+            <div class="col-xs-6 text-right">
+                <strong>플랫폼사업개발팀</strong>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;margin-bottom:10px;">
+            <div class="col-xs-12">
+                <h4><strong>오늘 시간되시는분</strong></h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2 text-right">
+
+            </div>
+            <div class="col-xs-10 text-right">
+                <div class="row">
+                    <div class="col-xs-12 text-right">
+                        <h4><span class="label label-G">광화문</span></h4>
+                        <h5><strong><i class="fa fa-clock-o" aria-hidden="true"></i> 2017-12-31 오후 12:59</strong></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      <!-- <div class="form-group row">
         <label for="name" class="col-md-2 col-form-label">작성자</label>
         <div class="col-md-10">
           <input class="form-control" type="text" id="name" readonly="readonly">
-          <!-- <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p> -->
+          <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p>
         </div>
       </div>
       <div class="form-group row">
@@ -39,43 +88,43 @@
         <label for="title" class="col-md-2 col-form-label">제목</label>
         <div class="col-md-10">
           <input class="form-control" type="text" id="title" readonly="readonly">
-          <!-- <p class="form-control-static" id="title" style="padding-left: 10px; font-size: 15px"></p> -->
+          <p class="form-control-static" id="title" style="padding-left: 10px; font-size: 15px"></p>
         </div>
-      </div>
-      <div class="form-group row">
+      </div> -->
+      <!-- <div class="form-group row">
         <label for="place" class="col-md-2 col-form-label">장소</label>
         <div class="col-md-10">
           <input class="form-control" type="text" id="location" readonly="readonly">
-          <!-- <p class="form-control-static" id="location" style="padding-left: 10px; font-size: 15px"></p> -->
+          <p class="form-control-static" id="location" style="padding-left: 10px; font-size: 15px"></p>
         </div>
       </div>
       <div class="form-group row">
         <label for="meetDay" class="col-md-2 col-form-label">만남일</label>
         <div class="col-md-10">
           <input class="form-control" type="datetime-local" id="meetingdate" readonly="readonly">
-          <!-- <p class="form-control-static" id="meetingdate" style="padding-left: 10px; font-size: 15px"></p> -->
+          <p class="form-control-static" id="meetingdate" style="padding-left: 10px; font-size: 15px"></p>
         </div>
-      </div>
-      <div class="form-group row">
+      </div> -->
+      <!-- <div class="form-group row">
         <label for="category" class="col-md-2 col-form-label">범주</label>
         <div class="col-md-10">
           <input class="form-control" type="text" id="category" readonly="readonly">
         </div>
-      </div>
+      </div> -->
       <div class="form-group row">
-        <label for="contents" class="col-md-2 col-form-label">내용</label>
+        <!-- <label for="contents" class="col-md-2 col-form-label">내용</label> -->
         <div class="col-md-10">
           <textarea class="form-control" rows="5" id="contents" readonly="readonly"></textarea>
         </div>
       </div>
       <div class="form-group row" id="attendQ">
-        <label for="attendBtn" class="col-md-2 col-form-label">참석여부</label>
+        <!-- <label for="attendBtn" class="col-md-2 col-form-label">참석여부</label> -->
         <div class="col-md-10">
           <a class="btn btn-sm btn-primary btn-block" role="button" id="attendBtn">참석하기</a>
         </div>
       </div>
       <div class="form-group row" id="attendN">
-        <label for="attendBtnN" class="col-md-2 col-form-label">참석여부</label>
+        <!-- <label for="attendBtnN" class="col-md-2 col-form-label">참석여부</label> -->
         <div class="col-md-10">
           <a class="btn btn-sm btn-primary btn-block" role="button" id="attendBtnN">불참하기</a>
         </div>
@@ -91,7 +140,7 @@
         <a class="btn btn-primary" role="button" id="delete">삭제</a>
         <a class="btn btn-primary" role="button" id="list">목록</a>
       </div>
-    
+
     <!-- <div id="attendYes">"참석" 으로 변경되었습니다.</div>
     <div id="attendNo">"불참" 으로 변경되었습니다.</div> -->
     <script src="../lib/jquery/dist/jquery.min.js"></script>
