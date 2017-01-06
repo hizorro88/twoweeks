@@ -7,7 +7,7 @@ body {
 }
 
 .label-G {
-    background-color: #5cb85c;
+    background-color: #d9534f;
 }
 
 .label-W {
@@ -18,9 +18,11 @@ body {
     background-color: #f0ad4e;
 }
 
-.navbar-inverse {
+.label-invite {
     background-color: #fff;
-    border-color: #cd0c0c;
+    border: 1px solid #ddd;
+    color: #000;
+    font-size: 100%;
 }
 
 .form-signin {

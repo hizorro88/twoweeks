@@ -22,18 +22,39 @@
 
   <body>
 
+      <div class="text-center">
+          <img src="/img/tastytime_logo.png">
+      </div>
+
+
     <div class="container">
+
+
+
       <form class="form-signin" name="updatePwForm">
-        <h2 class="form-signin-heading">로그인 수정</h2>
 
+          <div style="padding:15px 0;">
+              <div class="alert alert-info alert-dismissible fade in text-center" role="alert">
+                  <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+                  <p><strong>새로운 비밀번호로 변경하시기 바랍니다.</strong></p>
+              </div>
+          </div>
+        <!-- <h2 class="form-signin-heading">로그인 수정</h2> -->
+
+        <!-- <div class="form-group row">
+          <label for="name" class="col-xs-2 col-form-label">ID</label>
+          <div class="col-xs-10">
+            <p class="form-control-static" id="id" style="padding-left: 30px; font-size: 20px"></p>
+          </div>
+        </div> -->
         <!-- ID Default -->
-        <label for="id" class="col-form-label">ID</label>
-        <p class="form-control-static" id="id" style="padding-left: 30px; font-size: 20px"></p>
+        <!-- <label for="id" class="col-form-label">ID</label> -->
 
-        <label for="NewPassword">새 비밀번호</label>
-        <input type="password" id="NewPassword" class="form-control" placeholder="새 비밀번호를 입력하세요.(8자리 이상)" required autofocus>
-        <label for="RePassword">비밀번호 확인</label>
-        <input type="password" id="RePassword" class="form-control" placeholder="다시 한 번 입력하세요." required>
+
+        <!-- <label for="NewPassword">새 비밀번호</label> -->
+        <input type="password" id="NewPassword" class="form-control" placeholder="새 비밀번호를 입력하세요.(8자리 이상)" required autofocus style="margin-bottom:20px;">
+        <!-- <label for="RePassword">비밀번호 확인</label> -->
+        <input type="password" id="RePassword" class="form-control" placeholder="다시 한 번 비밀번호를 입력하세요." required style="margin-bottom:20px;">
 
         <!-- 이름 -->
         <!-- <label for="name" class="col-form-label">이름</label>
@@ -43,9 +64,10 @@
         <!-- <label for="team" class="col-form-label">팀</label>
         <p class="form-control-static" id="team" style="padding-left: 30px; font-size: 20px"></p> -->
 
-        <a class="btn btn-lg btn-primary btn-block" role="button" id="updatePassword">확인</a>
-
-        <a class="btn btn-lg btn-primary btn-block" role="button" id="back" >취소</a>
+        <div class="row">
+            <div class="col-xs-6"><a class="btn btn-lg btn-success btn-block" role="button" id="updatePassword"><strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> 확인</strong></a></div>
+            <div class="col-xs-6"><a class="btn btn-lg btn-warning btn-block" role="button" id="back" ><strong><i class="fa fa-ban" aria-hidden="true"></i> 취소</strong></a></div>
+        </div>
 
       </form>
     </div> <!-- /container -->

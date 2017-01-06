@@ -9,7 +9,7 @@ body {
 }
 
 .form-signin #userId {
-    margin: 20px 0 20px 0;
+    margin-bottom: 20px;
 }
 
 .form-signin #password {
@@ -17,7 +17,7 @@ body {
 }
 
 .form-signin {
-  max-width: 330px;
+  /*max-width: 330px;*/
   padding: 15px;
   margin: 0 auto;
 }
