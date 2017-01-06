@@ -10,8 +10,8 @@ $(document).ready(function(){
 					team: username,
 					title: $('#title').val(),
 					meetingDate: $('#meetingDate').val(),
-					category: $('#category').val(),
-					location: $('#location').val(),
+					category: //$('#category').val(),
+					location: //$('#location').val(),
 					content: $('#contents').val()
 				})
 
