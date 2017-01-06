@@ -197,7 +197,7 @@ $(document).ready(function(){
 
 	// 목록 버튼 클릭 시
 	$('#list').click(function(){
-		store.remove("detaildata");
+		// store.remove("detaildata");
 		store.remove("riceTimeId");
 		location.href="/views/list.html";
 	});

@@ -5,6 +5,11 @@ $(document).ready(function(){
 	// }, false);
 
 	function tokenCheck(){
+		if (!store.get("userId") || !store.get("username") || !store.get("department") || !store.get("url")){
+			store.remove("token");
+			location.href="../index.html";
+		}
+
 		if (!store.get("token")){
 			location.href="../index.html";
 		} else { //토큰이 있는 경우
@@ -21,4 +26,3 @@ $(document).ready(function(){
 	}
 	tokenCheck();
 });
-

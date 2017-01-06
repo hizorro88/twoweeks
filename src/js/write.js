@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	var userId = store.get("userId");
 	var username = store.get("username");
 	var team = store.get("department");
