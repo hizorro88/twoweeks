@@ -28,13 +28,17 @@ $(document).ready(function(){
 		}
 	});
 
+	//참가자 세팅
 	function attendSetting(){
-		//참가자 세팅
+		
 		for(var i=0; i<attendDataLength; i++){
-			$("#attendList").append("<span class='label label-invite' id='"+ attendData[i].userId +"'></span>");
+			if ((i != 0) && (i % 5 == 0)){
+				console.log("test")
+				$("#attendList").append("<p/>");
+			}
 
-			// $("#attendList").append("<a class='btn btn-sm btn-primary' id='"+ attendData[i].userId +"'></a>&nbsp;"); 
-
+			$("#attendList").append("<span class='label label-invite' id='"+ attendData[i].userId +"'></span>&nbsp;");
+			
 			//true / false 따라서 초기 색상 변경
 			if (attendData[i].join == "true"){
 				$("#"+attendData[i].userId).attr("class", "label label-invite");	
@@ -46,7 +50,7 @@ $(document).ready(function(){
             $("#"+attendData[i].userId).text(attendData[i].joiner);
         }
 	}
-
+	//기본 폼 세팅
 	function formSetting(){
 
 		var imageInfo;
@@ -102,9 +106,6 @@ $(document).ready(function(){
 
 		$("#meetingdate").text(finalDate);
 		$("#contents").val(detailData.content);
-
-		
-
 		$("#location").text(detailData.location);
 
 		//본인 아이디와 글의 아이디가 같은 경우(본인이 작성한 글인 경우)
@@ -128,21 +129,45 @@ $(document).ready(function(){
 			$("#update").hide(); // 수정, 삭제 버튼 비활성화
 			$("#delete").hide();
 			
+			var attendValue; //참석 하는지 안하는지
+			var attendInOut; //참석자 명단에 있는지 없는지
+			var myI;
 			// 참석자 명단에 본인이 있다면 참석 질문 비활성화, 명단에 없다면 활성화
 			for(var i=0; i<attendDataLength; i++){
 				if (attendData[i].userId === userId){
-					if (attendData[i].join == "true"){ //불참 활성화
-						$("#attendQ").hide();
-						$("#attendN").show();
-					} else {	//참석 활성화
-						$("#attendQ").show();
-						$("#attendN").hide(); 
-					}
+					attendInOut = true;
+					myI = i;
+					break;
 				} else {
+					//명단에 없던 경우,
+					attendInOut = false;
+				}
+			}
+
+			if (attendInOut){
+				if (attendData[myI].join == "true"){ //불참 활성화
+					attendValue = true;
+				} else {							//참석 활성화
+					attendValue = false;
+				}
+			}
+			
+			//참석자 명단에 이미 있고, 참석하는 경우
+			if (attendInOut){
+				if (attendValue) {
+					// console.log("test0")
+					$("#attendN").show();
+					$("#attendQ").hide();
+				} else {
+					// console.log("test1")
 					$("#attendQ").show();
 					$("#attendN").hide();
 				}
-			}	
+			} else {
+				// console.log("test2")
+				$("#attendQ").show();
+				$("#attendN").hide();
+			}
 		}
 	};
 
@@ -172,8 +197,8 @@ $(document).ready(function(){
 				success: function(data) {
 					//버튼 색상 변경
 					if(data.join == "true"){
-						$("#attendQ").hide();
 						$("#attendN").show();
+						$("#attendQ").hide();
 						$("#" + joinerId).attr("class", "label label-invite");
 					} else {
 						$("#attendQ").show();
@@ -193,10 +218,10 @@ $(document).ready(function(){
 			    },
 				type: 'POST',
 				dataType: 'json',
-				data: JSON.stringify({
+				data: JSON.stringify([{
 					joiner : username, 
 					userId : userId
-				}),
+				}]),
 				success: function(data) {
 					location.reload();//화면 갱신
 				}
@@ -231,7 +256,6 @@ $(document).ready(function(){
 		});
 	});
 
-
 	$("#update").click(function(){
 		location.href="/views/update.html"
 	});
@@ -243,35 +267,4 @@ $(document).ready(function(){
 		location.href="/views/list.html";
 	});
 
-	//참석 의사 변경
-	// $("#attendList .btn").click(function(e){
-
-	// 	var joinerId = $(this).attr('id');
-
-	// 	//댓글의 id와 내 아이디가 같은경우, 본인의 참가만 수정 가능하게 비교 필요
-	// 	if (userId === joinerId){
-	// 		$.ajax({
-	// 			url: store.get("url")+'/ricetimes/' + riceTimeId + '/persons/' + userId,
-	// 			headers: {
-	// 		        'Content-Type':'application/json',
-	// 	 	       	'x-auth-token':store.get("token")
-	// 		    },
-	// 			type: 'PUT',
-	// 			dataType: 'json',
-	// 			success: function(data) {
-	// 				// $('#attendYes').attr("class", "show");
-	// 				// $('#attendNo').attr("class", "show");
-	// 				// setTimeout(function(){ $('#snackbar').attr("class", ""); }, 1000);
-					// //버튼 색상 변경
-					// if(data.join == "true"){
-					// 	$("#" + joinerId).attr("class", "btn btn-sm btn-primary");
-					// 	// setTimeout(function(){ $('#attendYes').attr("class", ""); }, 1000);
-					// } else {
-					// 	$("#" + joinerId).attr("class", "btn btn-sm btn-danger");	
-					// 	// setTimeout(function(){ $('#attendNo').attr("class", ""); }, 1000);
-					// }
-	// 			}
-	// 		});
-	// 	}
-	// });
 });

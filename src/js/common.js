@@ -28,5 +28,31 @@ $(document).ready(function(){
 			}
 		}
 	}
+	
 	tokenCheck();
+
+	// function ajaxCall(url, async, token, type, sendData){
+	// 	$.ajax({
+	// 		url: store.get("url")+"/ricetimes/" + riceTimeId,
+	// 		async: false, //결과값 전역변수에 넣어 두기
+	// 		headers: {
+	//         	'Content-Type':'application/json',
+	//         	'x-auth-token':store.get("token")
+	//     	},
+	// 		type: 'GET',
+	// 		dataType: 'json',
+	// 		success: function(data) {
+	// 			//전체 데이터
+	// 			detailData = store.set("detailData", data);
+	// 			//참가자 데이터
+	// 			attendData = detailData.joinRiceTime;
+	// 			attendDataLength = attendData.length;
+	// 			//참가자, 기본 폼 세팅
+	// 			attendSetting();
+	// 			formSetting();
+	// 		}
+	// 	});
+	// }
+
+
 });

@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="apple-touch-icon" href="/img/tastytime_logo.png" /> <!-- 114 -->
+    <link rel="shortcut icon" href="/img/tastytime_logo.png" /> <!-- 72 -->
+
     <title>Tasty Time</title>
 
     <!-- Bootstrap core CSS -->
@@ -16,168 +19,109 @@
 
     <link href="../css/common.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
+    <link href="../css/write.css" rel="stylesheet">
 
   </head>
 
   <body>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-              <div class="row">
-
-                  <div class="col-xs-4">
-                  </div>
-                  <div class="col-xs-4 text-center">
-                     <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50%"/></a>
-                  </div>
-                  <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
-                      <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
-                  </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4">
               </div>
-          </div>
-      </nav>
-
+                <div class="col-xs-4 text-center">
+                   <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50%"/></a>
+                </div>
+                <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
+                    <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
-
-        <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd">
-            <div class="col-xs-6">
-                <button class="btn btn-sm btn-warning" id="back"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 취소</strong></button>
-            </div>
-            <div class="col-xs-6 text-right">
-                 <button class="btn btn-sm btn-success" id="submit"><strong>등록 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-            </div>
+      <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd">
+        <div class="col-xs-4">
+          <button class="btn btn-sm btn-warning" id="back"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 취소</strong></button>
         </div>
-
-        <div class="row" style="padding-top:20px;padding-bottom:20px;">
-            <div class="col-xs-6">
-                <strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;주선자 :<span id="name"></span></strong>
-            </div>
-            <div class="col-xs-6 text-right">
-                <strong><span id="team"></span></strong>
-            </div>
+        <div class="col-xs-4 text-center">
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal" id="doInvite"><strong><i class="fa fa-user-circle" aria-hidden="true"></i> 초대하기</strong></button>
         </div>
-
-      <!-- <h1>Rice Time 등록</h1> -->
-
-      <!-- <div class="form-group row">
-        <label for="name" class="col-md-2 col-form-label">작성자</label>
-        <div class="col-md-10">
-          <p class="form-control-static" id="name" style="padding-left: 10px; font-size: 15px"></p>
+        <div class="col-xs-4 text-right">
+          <button class="btn btn-sm btn-success" id="submit"><strong>등록 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
         </div>
       </div>
-      <div class="form-group row">
-        <label for="team" class="col-md-2 col-form-label">팀</label>
-        <div class="col-md-10">
-          <p class="form-control-static" id="team" style="padding-left: 10px; font-size: 15px"></p> -->
-          <!-- <input class="form-control" type="text" placeholder="예시) 소프트웨어개발센터 플랫폼사업개발팀" id="team" maxlength="25" autofocus required> -->
-        <!-- </div>
-      </div> -->
 
+      <div class="row" style="padding-top:20px;padding-bottom:20px;">
+        <div class="col-xs-6">
+            <strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;주선자 :<span id="name"></span></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+            <strong><span id="team"></span></strong>
+        </div>
+      </div>
 
       <div class="form-group row">
-        <!-- <label for="title" class="col-md-2 col-form-label">제목</label> -->
-        <!-- <div class="col-md-10">
-          <input class="form-control" type="text" placeholder="예시) 광화문에서 한께 식사하실분~?" id="title" maxlength="50" required>
-        </div> -->
         <div class="col-md-12">
           <input class="form-control" type="text" placeholder="제목" id="title" maxlength="50" required>
         </div>
       </div>
 
       <div class="panel panel-default">
-          <div class="panel-body">
-              <div class="row">
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="location" id="inlineRadio1" value="광화문" checked>
-                      </div>
-                      <span class="label label-G">광화문</span>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="location" id="inlineRadio1" value="우면동" >
-                      </div>
-                      <span class="label label-W">우면동</span>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="location" id="inlineRadio1" value="분당">
-                      </div>
-                      <span class="label label-B">분당</span>
-                  </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 text-center">
+              <div>
+                <input type="radio" name="location" id="inlineRadio1" value="광화문" checked>
               </div>
+              <span class="label label-G">광화문</span>
+            </div>
+            <div class="col-xs-4 text-center">
+              <div>
+                  <input type="radio" name="location" id="inlineRadio1" value="우면동" >
+              </div>
+              <span class="label label-W">우면동</span>
+            </div>
+            <div class="col-xs-4 text-center">
+              <div>
+                  <input type="radio" name="location" id="inlineRadio1" value="분당">
+              </div>
+              <span class="label label-B">분당</span>
+            </div>
           </div>
+        </div>
       </div>
 
       <div class="panel panel-default">
-          <div class="panel-body">
-              <div class="row">
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="category" id="inlineRadio1" value="밥" checked>
-                      </div>
-                      <img src="/img/plate_50x50.png">
-                   </div>
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="category" id="inlineRadio1" value="술">
-                      </div>
-                      <img src="/img/beer_50x50.png">
-                  </div>
-                  <div class="col-xs-4 text-center">
-                      <div>
-                          <input type="radio" name="category" id="inlineRadio1" value="커피">
-                      </div>
-                      <img src="/img/coffee_50x50.png">
-                  </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 text-center">
+              <div>
+                <input type="radio" name="category" id="inlineRadio1" value="밥" checked>
               </div>
+              <img src="/img/plate_50x50.png">
+            </div>
+            <div class="col-xs-4 text-center">
+              <div>
+                <input type="radio" name="category" id="inlineRadio1" value="술">
+              </div>
+              <img src="/img/beer_50x50.png">
+            </div>
+            <div class="col-xs-4 text-center">
+              <div>
+                <input type="radio" name="category" id="inlineRadio1" value="커피">
+              </div>
+              <img src="/img/coffee_50x50.png">
+            </div>
           </div>
+        </div>
       </div>
 
-      <!-- <div class="form-group row">
-        <label for="location" class="col-md-2 col-form-label">장소</label>
-        <div class="col-md-10">
-          <select class="form-control" id="location">
-            <option selected>광화문</option>
-            <option>양재</option>
-            <option>분당</option>
-          </select>
-
-          <label class="radio-inline">
-              <input type="radio" name="location">광화문
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="location">양재
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="location">분당
-            </label>
-        </div>
-      </div> -->
-
-
       <div class="row" style="margin-bottom:20px;">
-        <!-- <label for="meetingDate" class="col-md-2 col-form-label">만남일</label> -->
-        <!-- <div class="col-md-10">
-          <input class="form-control" type="datetime-local" id="meetingDate">
-        </div> -->
         <div class="col-md-12">
           <input class="form-control" type="datetime-local" id="meetingDate">
         </div>
       </div>
-
-
-
-      <!-- <div class="form-group row">
-        <label for="category" class="col-md-2 col-form-label">범주</label>
-        <div class="col-md-10">
-          <select class="form-control" id="category">
-            <option selected>밥</option>
-            <option>술</option>
-            <option>커피</option>
-          </select>
-        </div>
-      </div> -->
 
       <div class="form-group row">
         <!-- <label for="contents" class="col-md-2 col-form-label">내용</label> -->
@@ -187,18 +131,55 @@
 메뉴:
 세부사항:</textarea>
         </div>
-      </div>
+      </div>  
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-      <!-- <div class="form-group pull-right">
-        <a class="btn btn-primary" role="button" id="submit">등록</a>
-        <a href="list.html" class="btn btn-primary" role="button">취소</a>
-      </div> -->
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">초대할 사람 검색</h4>
+          </div>
+
+          <div class="modal-body">
+            <!-- 검색할 수 있는 검색창 -->
+            <input type="text" id="search" placeholder="검색어: 이름" class="addresspicker" maxlength="5" />
+
+            <!--리스트에 추가 버튼 -->
+            <button type="button" class="btn btn-primary" id="add">추가</button>
+
+            <!-- 초대할 수 있는 사람 리스트를 출력 -->
+
+          </div>
+
+          <div class="modal-footer">
+            <!-- 초대하려고 선택한 사람 리스트 출력 -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-xs-12" id="addList">
+                    <!-- 여기부터 참가자 반복문으로 처리 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="invite">초대</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>      
+
+    
+
 
     <script src="../lib/jquery/dist/jquery.js"></script>
+    <script src="../lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="../lib/store-js/store.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/write.js"></script>
-
   </body>
 </html>
