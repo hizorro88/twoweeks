@@ -52,7 +52,6 @@ $(document).ready(function(){
 	}
 	//기본 폼 세팅
 	function formSetting(){
-
 		var imageInfo;
     	if (detailData.category == '밥'){
     		imageInfo = 'plate_50x50.png';
@@ -110,23 +109,26 @@ $(document).ready(function(){
 
 		//본인 아이디와 글의 아이디가 같은 경우(본인이 작성한 글인 경우)
 		if (userId === detailData.userId){
-			$("#update").show(); // 수정, 삭제 버튼 활성화
+			// 수정, 삭제 버튼 활성화
+			$("#update").show(); 
 			$("#delete").show();
 			
-			// 참석자 명단에 본인이 있다면 참석 질문 비활성화, 명단에 없다면 활성화
+			// 본인이 있다면 참석/불참
 			for(var i=0; i<attendDataLength; i++){
 				if (attendData[i].userId === userId){
-					if (attendData[i].join == "true"){ //불참 활성화
+					if (attendData[i].join == "true"){
 						$("#attendQ").hide();
 						$("#attendN").show();
-					} else {	//참석 활성화
+					} else {
 						$("#attendQ").show();
 						$("#attendN").hide(); 
 					}
 				}
 			}
-		} else { //남의 글
-			$("#update").hide(); // 수정, 삭제 버튼 비활성화
+		//남의 글
+		} else { 
+			// 수정, 삭제 버튼 비활성화
+			$("#update").hide(); 
 			$("#delete").hide();
 			
 			var attendValue; //참석 하는지 안하는지
@@ -138,8 +140,7 @@ $(document).ready(function(){
 					attendInOut = true;
 					myI = i;
 					break;
-				} else {
-					//명단에 없던 경우,
+				} else { //명단에 없던 경우,
 					attendInOut = false;
 				}
 			}
@@ -155,16 +156,13 @@ $(document).ready(function(){
 			//참석자 명단에 이미 있고, 참석하는 경우
 			if (attendInOut){
 				if (attendValue) {
-					// console.log("test0")
-					$("#attendN").show();
 					$("#attendQ").hide();
+					$("#attendN").show();
 				} else {
-					// console.log("test1")
 					$("#attendQ").show();
 					$("#attendN").hide();
 				}
 			} else {
-				// console.log("test2")
 				$("#attendQ").show();
 				$("#attendN").hide();
 			}
@@ -218,10 +216,10 @@ $(document).ready(function(){
 			    },
 				type: 'POST',
 				dataType: 'json',
-				data: JSON.stringify([{
+				data: JSON.stringify({
 					joiner : username, 
 					userId : userId
-				}]),
+				}),
 				success: function(data) {
 					location.reload();//화면 갱신
 				}

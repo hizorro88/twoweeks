@@ -1,77 +1,157 @@
 $(document).ready(function(){
+	var inviteListData;
+	var postInviteListData;
+	// 받아온 초대 인원
+	var getInviteList = function(){
+		$.ajax({
+			url: store.get("url")+'/user/persons',
+			headers: {
+		        'Content-Type':'application/json',
+		        'x-auth-token':store.get("token")
+		    },
+		    async: false, //결과값 전역변수에 넣어 두기
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				inviteListData = data;
+			},
+			error: function(data, status, err) {
+				alert("error")
+			}
+		});
+	}
 
-	
-	$('#doInvite').click(function(){
-		var availableTags = [
-	      "ActionScript",
-	      "AppleScript",
-	      "Asp",
-	      "BASIC",
-	      "C",
-	      "C++",
-	      "Clojure",
-	      "COBOL",
-	      "ColdFusion",
-	      "Erlang",
-	      "Fortran",
-	      "Groovy",
-	      "Haskell",
-	      "Java",
-	      "JavaScript",
-	      "Lisp",
-	      "Perl",
-	      "PHP",
-	      "Python",
-	      "Ruby",
-	      "Scala",
-	      "Scheme"
-	    ];
-	    $( ".addresspicker" ).autocomplete({
-	      source: availableTags
-	    });
+	//보낼 초대 인원
+	var postInviteList = function(){
+		$.ajax({
+			url: store.get("url")+'/user/persons',
+			headers: {
+		        'Content-Type':'application/json',
+		        'x-auth-token':store.get("token")
+		    },
+			type: 'POST',
+			data: postInviteListData,
+			dataType: 'json',
+			success: function(data) {
+				alert("success");
+			},
+			error: function(data, status, err) {
+				alert("error");
+			}
+		});
+	}
 
-	    $('#add').click(function(){
-	    	//id값은 유일해야 함
-    		$("#addList").append("<span class='label label-invite pull-left' id='test'></span>&nbsp;");
-    		$("#test").text($("#search").val());
-	    });
-
-	    $('#invite').click(function(){
-	    	var test = $("#search").val();
-	    	console.log(test)
-	    });
-
-	});
+	$(".chosen-select").chosen();
+	// $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"}); 
 
 
-    // $( ".addresspicker" ).autocomplete({
-    //     source : function( request, response ) {
-    //          $.ajax({
-    //                 type: 'post',
-    //                 url: "/autocomplete.jsp",
-    //                 dataType: "json",
-    //                 // request.term = $("#autocomplete").val()
-    //                 data: { value : request.term },
-    //                 success: function(data) {
-    //                     //서버에서 json 데이터 response 후 목록에 뿌려주기 위함
-    //                     response(
-    //                         $.map(data, function(item) {
-    //                             return {
-    //                                 label: item.data,
-    //                                 value: item.data
-    //                             }
-    //                         })
-    //                     );
-    //                 }
-    //            });
-    //         },
-    //     //조회를 위한 최소글자수
-    //     minLength: 2,
-    //     select: function( event, ui ) {
-    //         // 만약 검색리스트에서 선택하였을때 선택한 데이터에 의한 이벤트발생
-    //     }
-    // });
 
+
+
+	// $('#doInvite').click(function(){
+	// 	//데이터 목록
+	// 	getInviteList();
+
+	// 	// var availableTags = [];
+
+	// 	for (var i=0; i<inviteListData.length; i++){
+	// 		//리스트를 만들어야 함
+	// 		$("#check-list-box").append("<li class='list-group-item' id='"+inviteListData[i].userId+"'></li>");
+
+	// 		$("#"+inviteListData[i].userId).text(inviteListData[i].username+"("+inviteListData[i].department+")");
+	// 	}
+		
+	// 	$(function () {
+ //    		$('.list-group.checked-list-box .list-group-item').each(function () {
+	// 	        // Settings
+	// 	        var $widget = $(this),
+	// 	            $checkbox = $('<input type="checkbox" class="hidden" />'),
+	// 	            color = ($widget.data('color') ? $widget.data('color') : "primary"),
+	// 	            style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+	// 	            settings = {
+	// 	                on: {
+	// 	                    icon: 'glyphicon glyphicon-check'
+	// 	                },
+	// 	                off: {
+	// 	                    icon: 'glyphicon glyphicon-unchecked'
+	// 	                }
+	// 	            };
+		            
+	// 	        $widget.css('cursor', 'pointer')
+	// 	        $widget.append($checkbox);
+
+	// 	        // Event Handlers
+	// 	        $widget.on('click', function () {
+	// 	            $checkbox.prop('checked', !$checkbox.is(':checked'));
+	// 	            $checkbox.triggerHandler('change');
+	// 	            updateDisplay();
+	// 	        });
+	// 	        $checkbox.on('change', function () {
+	// 	            updateDisplay();
+	// 	        });		          
+
+	// 	        // Actions
+	// 	        function updateDisplay() {
+	// 	            var isChecked = $checkbox.is(':checked');
+
+	// 	            // Set the button's state
+	// 	            $widget.data('state', (isChecked) ? "on" : "off");
+
+	// 	            // Set the button's icon
+	// 	            $widget.find('.state-icon')
+	// 	                .removeClass()
+	// 	                .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+	// 	            // Update the button's color
+	// 	            if (isChecked) {
+	// 	                $widget.addClass(style + color + ' active');
+	// 	            } else {
+	// 	                $widget.removeClass(style + color + ' active');
+	// 	            }
+	// 	        }
+
+	// 	        // Initialization
+	// 	        function init() {
+		            
+	// 	            if ($widget.data('checked') == true) {
+	// 	                $checkbox.prop('checked', !$checkbox.is(':checked'));
+	// 	            }
+		            
+	// 	            updateDisplay();
+
+	// 	            // Inject the icon if applicable
+	// 	            if ($widget.find('.state-icon').length == 0) {
+	// 	                $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+	// 	            }
+	// 	        }
+	// 	        init();
+	// 	    });
+		    
+	// 	    $('#get-checked-data').on('click', function(event) {
+	// 	        event.preventDefault(); 
+	// 	        var checkedItems = [], counter=0;
+
+	// 	        $("#check-list-box li.active").each(function(idx, li) {
+	// 	        	var invite_person = new Object();
+	// 	        	var substring = $(li).text().split('(');
+
+	// 	        	invite_person.joiner = substring[0]; //이름 
+	// 	        	invite_person.userId = $(li).attr('id'); //아이디
+	// 	        	checkedItems[counter] = JSON.stringify(invite_person);
+	// 	        	counter++;
+	// 	        	$("#addList").append("<span class='label label-invite' id='"+ counter +"'></span>&nbsp;");
+	// 				$("#"+counter).text(substring[0]);
+	// 	        });
+		        
+	// 	        postInviteListData = JSON.stringify(checkedItems, null, '\t');
+
+	// 	        //창 종료
+	// 	        $('#modal').modal('toggle');
+	// 	    });
+
+	// 	});
+   
+	// });
 
 
 	var userId = store.get("userId");
@@ -128,7 +208,6 @@ $(document).ready(function(){
 			$(this).val(str);
 		}
 	});
-
 	$('#contents').keyup(function(){
 		var str = $(this).val()
 		checkStr = str.indexOf('\?\?');
@@ -148,6 +227,9 @@ $(document).ready(function(){
 		} else if ($("#contents").val() == ""){
 			$("#contents").focus();
 		} else {
+			//초대 인원을 서버에게 전달
+			postInviteList();
+			//글 내용을 서버에게 전달
 			postItem();
 		}
 	});

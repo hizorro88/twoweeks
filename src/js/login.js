@@ -1,14 +1,6 @@
+
 $(document).ready(function () {
 
-	//스크롤 올리기
-	// window.addEventListener("load", function() {
-	// 	document.body.style.height = (document.documentElement.clientHeight + 5) + 'px';
-	// 	setTimeout(scrollTo, 0, 0, 1);
-	// }, false);
-	
-	// var userAgent = navigator.userAgent.toLowerCase();
-
-	// store.clear();
 	store.remove("department");
 	store.remove("detailData");
 	store.remove("listData");
@@ -16,12 +8,43 @@ $(document).ready(function () {
 	store.remove("userId");
 	store.remove("username");
 	store.set("url", "http://192.168.3.2:8000");
+	// store.set("url", "http://ktapi.m.bd-lab.com:8000");
 	
+	//token 있는 경우
 	if(store.get("token")){
 		location.href="/views/list.html"
 	}
 
 	$('#userId').val("010-");	
+
+	//@@@@@밑에 ajax 에서도 주석 풀어줘야 동작함.
+	// var personalToken;
+	// window.android.setMessage("go android");
+	// window.otherMessage=function(token){
+	// 	personalToken = token;
+	// }
+
+	// var postPersonalToken = function(){
+	// 	$.ajax({
+	// 		url: store.get("url")+'/fcm/'+store.get("userId"),
+	// 		headers: {
+	// 	        'Content-Type':'application/json',
+	// 	        'x-auth-token':store.get("token")
+	// 	    },
+	// 		type: 'POST',
+	// 		dataType: 'json',
+	// 		data: JSON.stringify({
+	// 			token: personalToken
+	// 		}),
+	// 		success: function(data) {
+	// 			//token 저장
+	// 			store.set("personalToken", personalToken);
+	// 		},
+	// 		error: function(data, status, err) {
+	// 			alert("error")
+	// 		}
+	// 	});
+	// }
 
 	//id 입력하는 부분
 	$('#userId').keyup(function(){
@@ -85,6 +108,9 @@ $(document).ready(function () {
 				var min = now.getMinutes();
 				store.set("loginDate", day);
 				store.set("loginTime", hour*60 + min); // 시간 저장
+
+				//기기 토큰 정보 저장
+				// postPersonalToken();
 
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동

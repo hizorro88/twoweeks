@@ -5,14 +5,11 @@ $(document).ready(function(){
 	var riceTimeId = store.get("riceTimeId");
 	var userId = store.get("userId");
 	var username = store.get("username");
-
 	$("#name").text(detailData.maker);
 	$("#team").text(detailData.team);
 	$("#title").val(detailData.title);
-
 	$('input:radio[name="location"][value="'+detailData.location+'"]').prop('checked', true);
 	$('input:radio[name="category"][value="'+detailData.category+'"]').prop('checked', true);
-	
 	$("#meetingDate").val(detailData.meetingDate);
 	$("#contents").val(detailData.content);
 

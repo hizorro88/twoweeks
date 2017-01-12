@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	
+	//초기 세팅
 	var userId = store.get("userId");
-
 	$("#id").text(userId);
 
-	//확인 버튼 클릭 이벤트: 비밀번호를 받아서 두 PW가 일치하면 update 요청
+	//확인 클릭 시, 비밀번호를 받아서 두 PW가 일치하면 update 요청
 	$("#updatePassword").click(function(){
 		var newPw = $("#NewPassword").val();
 		var rePw = $("#RePassword").val();
@@ -44,6 +44,7 @@ $(document).ready(function(){
 		}
 	});
 
+	//웹페이지에서 뒤로가기 누른 경우,
 	history.pushState(null, null, location.href); 
 	window.onpopstate = function(event) { 
 		store.remove("token") //토큰 삭제
