@@ -1,8 +1,6 @@
 $(document).ready(function(){
 	
-	// window.addEventListener("load", function() {
-	// 	setTimeout(scrollTo, 0, 0, 1);
-	// }, false);
+
 	$('#logout').click(function(){
 		store.clear();
 		location.href="../index.html";

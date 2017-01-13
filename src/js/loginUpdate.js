@@ -47,6 +47,7 @@ $(document).ready(function(){
 	//웹페이지에서 뒤로가기 누른 경우,
 	history.pushState(null, null, location.href); 
 	window.onpopstate = function(event) { 
+		alert("back")
 		store.remove("token") //토큰 삭제
 		location.href="../index.html"
 	}

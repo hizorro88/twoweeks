@@ -1,50 +1,99 @@
 
 $(document).ready(function () {
 
-	store.remove("department");
 	store.remove("detailData");
 	store.remove("listData");
-	store.remove("url");
-	store.remove("userId");
-	store.remove("username");
-	store.set("url", "http://192.168.3.2:8000");
-	// store.set("url", "http://ktapi.m.bd-lab.com:8000");
+	var id;
+	var pw;
+	var personalToken;
+	var pushId="";
 	
-	//token 있는 경우
-	if(store.get("token")){
-		location.href="/views/list.html"
+	// store.set("url", "http://192.168.3.2:8000");
+	store.set("url", "http://ktapi.m.bd-lab.com:8000");
+
+	$('#userId').val("010-");
+
+	
+	var signalToAndroid = function(){
+		window.android.setMessage("go android");
+		// alert("go android!");
 	}
 
-	$('#userId').val("010-");	
+	window.otherMessage=function(token, id){
+		personalToken = token;
+		pushId = id;
 
-	//@@@@@밑에 ajax 에서도 주석 풀어줘야 동작함.
-	// var personalToken;
-	// window.android.setMessage("go android");
-	// window.otherMessage=function(token){
-	// 	personalToken = token;
-	// }
+		if(pushId.length != 0 && pushId.length != 4){
+			store.set("pushId", pushId);
+			// alert("2:"+ store.get("pushId"));
+			if (store.get("token")){
+				location.href="/views/detail.html"
+			}
+		}
+	}
+	
+	try {
+		//안드로이드에서 값 받아오기
+		signalToAndroid();
+	} catch(e) {
+		// console.log(e)
+	}
+	// } finally {
 
-	// var postPersonalToken = function(){
-	// 	$.ajax({
-	// 		url: store.get("url")+'/fcm/'+store.get("userId"),
-	// 		headers: {
-	// 	        'Content-Type':'application/json',
-	// 	        'x-auth-token':store.get("token")
-	// 	    },
-	// 		type: 'POST',
-	// 		dataType: 'json',
-	// 		data: JSON.stringify({
-	// 			token: personalToken
-	// 		}),
-	// 		success: function(data) {
-	// 			//token 저장
-	// 			store.set("personalToken", personalToken);
-	// 		},
-	// 		error: function(data, status, err) {
-	// 			alert("error")
-	// 		}
-	// 	});
 	// }
+	
+
+
+	//token 있는 경우
+	var isToken = function(){
+		if(store.get("token")){
+			if (!store.get("userId") || !store.get("username") || !store.get("department") || !store.get("url")){
+				store.remove("userId");
+				store.remove("username");
+				store.remove("department");
+				store.remove("url");
+				store.remove("token");
+			} else {
+				location.href="/views/list.html"	
+			}
+		}
+	}
+	isToken();
+
+
+	var postPersonalToken = function(){
+		$.ajax({
+			url: store.get("url")+'/fcm/'+store.get("userId"),
+			headers: {
+		        'Content-Type':'application/json',
+		        'x-auth-token':store.get("token")
+		    },
+			type: 'POST',
+			dataType: 'json',
+			data: JSON.stringify({
+				token: personalToken
+			}),
+			complete: function(data) {
+				//token 저장
+				// alert(personalToken);
+				store.set("personalToken", personalToken);
+			},
+		});
+	}
+
+	var loginCheck = function(){
+		if (pw == "1234"){
+			//로그인 수정화면으로 이동
+			location.href="/views/loginUpdate.html"
+		} 
+		else if(pushId.length != 0 &&  pushId.length != 4){
+			location.href="/views/detail.html"
+		} 
+		else {
+			//목록 화면으로 이동
+			location.href="/views/list.html"
+		}	
+	}
 
 	//id 입력하는 부분
 	$('#userId').keyup(function(){
@@ -77,10 +126,26 @@ $(document).ready(function () {
         }
 	});
 
+	var defaultDataSetting = function(data){
+		//아이디, 이름, 토큰 저장
+		store.set("userId", id);
+		store.set("username", data.username);
+		store.set("token", data.token);
+		store.set("department", data.department);
+		
+		//토큰관리를 위한 시간
+		var now = new Date();
+		var day = now.getDate();
+		var hour = now.getHours();
+		var min = now.getMinutes();
+		store.set("loginDate", day);
+		store.set("loginTime", hour*60 + min); // 시간 저장
+	}
+
 	//로그인 버튼 클릭
 	$('#login').click(function(){
-		var id = $('#userId').val();
-		var pw = $('#password').val();
+		id = $('#userId').val();
+		pw = $('#password').val();
 
 		//보낼 때
 		$.ajax({
@@ -95,33 +160,14 @@ $(document).ready(function () {
 				password: pw
 			}),
 			success: function(data) {
-				//아이디, 이름, 토큰 저장
-				store.set("userId", id);
-				store.set("username", data.username);
-				store.set("token", data.token);
-				store.set("department", data.department);
-				
-				//토큰관리를 위한 시간
-				var now = new Date();
-				var day = now.getDate();
-				var hour = now.getHours();
-				var min = now.getMinutes();
-				store.set("loginDate", day);
-				store.set("loginTime", hour*60 + min); // 시간 저장
-
-				//기기 토큰 정보 저장
-				// postPersonalToken();
-
-				if (pw == "1234"){
-					//로그인 수정화면으로 이동
-					location.href="/views/loginUpdate.html"
-				} else {
-					//목록 화면으로 이동
-					location.href="/views/list.html"
-				}	
+				//기본 정보 저장(local)
+				defaultDataSetting(data);
+				//기기 토큰 정보 저장(server)
+				postPersonalToken();
+				//최종 목적지 결정
+				loginCheck();
 			},
 			error: function(data, status, err) {
-
 				if (data.status == 403){
 					alert("비밀번호를 확인하세요.");
 					$('#password').val("");

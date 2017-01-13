@@ -15,9 +15,18 @@
     <!-- Bootstrap core CSS -->
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-
+    <link href="../lib/chosen/chosen.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
+
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script src="../lib/store-js/store.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../lib/chosen/chosen.jquery.js"></script>
+    <script src="../lib/chosen/chosen.jquery.min.js"></script>
+    <script src="../js/update.js"></script>
+
   </head>
 
   <body>
@@ -27,7 +36,7 @@
                   <div class="col-xs-4">
                   </div>
                   <div class="col-xs-4 text-center">
-                      <img src="/img/tastytime_logo.png" style="width:50px; height: 50px;"/>
+                      <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50px; height: 50px;"/></a>
                   </div>
                   <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
                       <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
@@ -46,7 +55,7 @@
             </div>
         </div>
 
-        <div class="row" style="padding-top:20px;padding-bottom:20px;">
+        <div class="row" style="padding-top:10px;padding-bottom:10px;">
             <div class="col-xs-6">
                 <strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;주선자 : <span id="name"></span></strong>
             </div>
@@ -55,14 +64,14 @@
             </div>
         </div>
 
-      <div class="form-group row">
+      <div class="form-group row margin-bottom" style="padding-top:0px;padding-bottom:0px;">
         <div class="col-md-12">
           <input class="form-control" type="text" placeholder="제목" id="title" maxlength="50" required>
         </div>
       </div>
 
-      <div class="panel panel-default">
-          <div class="panel-body">
+      <div class="panel panel-default margin-bottom">
+          <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
               <div class="row">
                   <div class="col-xs-4 text-center">
                       <div>
@@ -86,8 +95,8 @@
           </div>
       </div>
 
-      <div class="panel panel-default">
-          <div class="panel-body">
+      <div class="panel panel-default margin-bottom">
+          <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
               <div class="row">
                   <div class="col-xs-4 text-center">
                       <div>
@@ -111,7 +120,7 @@
           </div>
       </div>
 
-      <div class="row" style="margin-bottom:20px;">
+      <div class="row" style="margin-bottom:10px;">
         <div class="col-md-12">
           <input class="form-control" type="datetime-local" id="meetingDate">
         </div>
@@ -126,11 +135,11 @@
         </div>
       </div>
 
-    <script src="../lib/jquery/dist/jquery.js"></script>
-    <script src="../lib/store-js/store.min.js"></script>
-    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/update.js"></script>
+      <select data-placeholder="초대하기" class="col-xs-12 form-control chosen-select" multiple id="addList">
+          
+    </select>
+
+    
 
   </body>
 </html>

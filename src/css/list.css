@@ -5,6 +5,39 @@ body {
   padding-top:50px;
   background-color: #fff;
 }
+.chosen-container .chosen-drop {
+    border-bottom: 0;
+    border-top: 1px solid #aaa;
+    top: auto;
+    bottom: 50px;
+
+}
+
+.chosen-container.chosen-with-drop .chosen-single {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    background-image: none;
+}
+
+.chosen-container.chosen-with-drop .chosen-drop {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    
+    /*box-shadow: none;*/
+    
+    margin-bottom: -16px;
+}
+
+.margin-bottom {
+    margin-bottom:10px;
+}
 
 .label-G {
     background-color: #d9534f;
@@ -21,13 +54,20 @@ body {
 .label-invite {
     background-color: #fff;
     border: 1px solid #ddd;
-    color: #000;
+    color: #000; /*글자색*/
     font-size: 100%;
 }
 .label-notinvite {
     background-color: #fff;
-    border: 1px solid #ddd;
-    color: #FF0000;
+    border: 1px solid #FF0000;
+    color: #000;
+    font-size: 100%;
+}
+
+.label-holdinvite {
+    background-color: #fff;
+    border: 1px solid #FFFF00;
+    color: #000;
     font-size: 100%;
 }
 

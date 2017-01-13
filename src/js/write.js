@@ -1,4 +1,9 @@
 $(document).ready(function(){
+
+	var userId = store.get("userId");
+	var username = store.get("username");
+	var team = store.get("department");
+
 	var inviteListData;
 	var postInviteListData;
 	// 받아온 초대 인원
@@ -14,149 +19,51 @@ $(document).ready(function(){
 			dataType: 'json',
 			success: function(data) {
 				inviteListData = data;
+				store.set("inviteListData", inviteListData);
+				for (var i=0; i<inviteListData.length; i++){
+					// 본인 이름 제외하고 리스트 구성
+					if (inviteListData[i].username != username){
+						//제목 정보 수정
+						var subtitle = inviteListData[i].department;
+						var retitle;
+						if (subtitle.length > 6){
+							retitle = subtitle.substring(0, 7) + ".."; //제목
+						} else {
+							retitle = subtitle;
+						}
+
+						$("#addList").append("<option value='"+inviteListData[i].userId+"'>"+inviteListData[i].username+" ("+retitle+") "+"</option>");	
+					}
+				}
 			},
 			error: function(data, status, err) {
 				alert("error")
 			}
 		});
 	}
+	getInviteList();
 
-	//보낼 초대 인원
-	var postInviteList = function(){
-		$.ajax({
-			url: store.get("url")+'/user/persons',
-			headers: {
-		        'Content-Type':'application/json',
-		        'x-auth-token':store.get("token")
-		    },
-			type: 'POST',
-			data: postInviteListData,
-			dataType: 'json',
-			success: function(data) {
-				alert("success");
-			},
-			error: function(data, status, err) {
-				alert("error");
-			}
-		});
-	}
+	$(".chosen-select").chosen().change(function(event){
+	     if(event.target == this){
+	     	var checkedItems = $(this).val();
+	     	var checkedNames = $("#addList option:selected").text();
+	     	var leftstring = checkedNames.split(' ');
+	     	var j=0;
 
-	$(".chosen-select").chosen();
-	// $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"}); 
+	     	for(var i=0; i<checkedItems.length; i++){
+
+	     		var invite_person = new Object();
+		     	invite_person.joiner = leftstring[j]; //이름 
+		     	invite_person.userId = checkedItems[i]; //번호
+		     	j = j+2;
+		     	checkedItems[i] = invite_person;
+	     	}
+
+     	   postInviteListData = checkedItems;
+	     }
+	});
 
 
-
-
-
-	// $('#doInvite').click(function(){
-	// 	//데이터 목록
-	// 	getInviteList();
-
-	// 	// var availableTags = [];
-
-	// 	for (var i=0; i<inviteListData.length; i++){
-	// 		//리스트를 만들어야 함
-	// 		$("#check-list-box").append("<li class='list-group-item' id='"+inviteListData[i].userId+"'></li>");
-
-	// 		$("#"+inviteListData[i].userId).text(inviteListData[i].username+"("+inviteListData[i].department+")");
-	// 	}
-		
-	// 	$(function () {
- //    		$('.list-group.checked-list-box .list-group-item').each(function () {
-	// 	        // Settings
-	// 	        var $widget = $(this),
-	// 	            $checkbox = $('<input type="checkbox" class="hidden" />'),
-	// 	            color = ($widget.data('color') ? $widget.data('color') : "primary"),
-	// 	            style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
-	// 	            settings = {
-	// 	                on: {
-	// 	                    icon: 'glyphicon glyphicon-check'
-	// 	                },
-	// 	                off: {
-	// 	                    icon: 'glyphicon glyphicon-unchecked'
-	// 	                }
-	// 	            };
-		            
-	// 	        $widget.css('cursor', 'pointer')
-	// 	        $widget.append($checkbox);
-
-	// 	        // Event Handlers
-	// 	        $widget.on('click', function () {
-	// 	            $checkbox.prop('checked', !$checkbox.is(':checked'));
-	// 	            $checkbox.triggerHandler('change');
-	// 	            updateDisplay();
-	// 	        });
-	// 	        $checkbox.on('change', function () {
-	// 	            updateDisplay();
-	// 	        });		          
-
-	// 	        // Actions
-	// 	        function updateDisplay() {
-	// 	            var isChecked = $checkbox.is(':checked');
-
-	// 	            // Set the button's state
-	// 	            $widget.data('state', (isChecked) ? "on" : "off");
-
-	// 	            // Set the button's icon
-	// 	            $widget.find('.state-icon')
-	// 	                .removeClass()
-	// 	                .addClass('state-icon ' + settings[$widget.data('state')].icon);
-
-	// 	            // Update the button's color
-	// 	            if (isChecked) {
-	// 	                $widget.addClass(style + color + ' active');
-	// 	            } else {
-	// 	                $widget.removeClass(style + color + ' active');
-	// 	            }
-	// 	        }
-
-	// 	        // Initialization
-	// 	        function init() {
-		            
-	// 	            if ($widget.data('checked') == true) {
-	// 	                $checkbox.prop('checked', !$checkbox.is(':checked'));
-	// 	            }
-		            
-	// 	            updateDisplay();
-
-	// 	            // Inject the icon if applicable
-	// 	            if ($widget.find('.state-icon').length == 0) {
-	// 	                $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
-	// 	            }
-	// 	        }
-	// 	        init();
-	// 	    });
-		    
-	// 	    $('#get-checked-data').on('click', function(event) {
-	// 	        event.preventDefault(); 
-	// 	        var checkedItems = [], counter=0;
-
-	// 	        $("#check-list-box li.active").each(function(idx, li) {
-	// 	        	var invite_person = new Object();
-	// 	        	var substring = $(li).text().split('(');
-
-	// 	        	invite_person.joiner = substring[0]; //이름 
-	// 	        	invite_person.userId = $(li).attr('id'); //아이디
-	// 	        	checkedItems[counter] = JSON.stringify(invite_person);
-	// 	        	counter++;
-	// 	        	$("#addList").append("<span class='label label-invite' id='"+ counter +"'></span>&nbsp;");
-	// 				$("#"+counter).text(substring[0]);
-	// 	        });
-		        
-	// 	        postInviteListData = JSON.stringify(checkedItems, null, '\t');
-
-	// 	        //창 종료
-	// 	        $('#modal').modal('toggle');
-	// 	    });
-
-	// 	});
-   
-	// });
-
-
-	var userId = store.get("userId");
-	var username = store.get("username");
-	var team = store.get("department");
 
 	var postItem = function(){
 		var sendData = JSON.stringify({
@@ -167,7 +74,8 @@ $(document).ready(function(){
 					meetingDate: $('#meetingDate').val(),
 					category: $('input:radio[name="category"]:checked').val(),
 					location: $('input:radio[name="location"]:checked').val(),
-					content: $('#contents').val()
+					content: $('#contents').val(),
+					joinRiceTime: postInviteListData
 				})
 
 		var token = store.get("token");
@@ -183,7 +91,10 @@ $(document).ready(function(){
 			data: sendData,
 			success: function(data) {
 				alert("만남이 등록되었습니다.");
-				//history.back()
+				// var ricetimeid = data.riceTimeId;
+				
+				// postInviteList(ricetimeid);
+
 				location.href = "/views/list.html";
 			}
 		});
@@ -227,8 +138,6 @@ $(document).ready(function(){
 		} else if ($("#contents").val() == ""){
 			$("#contents").focus();
 		} else {
-			//초대 인원을 서버에게 전달
-			postInviteList();
 			//글 내용을 서버에게 전달
 			postItem();
 		}

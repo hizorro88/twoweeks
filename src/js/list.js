@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+	// var pushMove = function(){
+	// 	alert("push:  "+store.get(pushId));
+	// 	if (store.get(pushId)){
+	// 		alert("push")
+	// 		location.href="/views/detail.html"
+	// 	}
+	// }
+	// pushMove();
 
 	var totalList;	//받아온 데이터를 저장할 변수
 	var listLen;	//받아온 데이터 객체의 수
@@ -65,7 +73,7 @@ $(document).ready(function(){
 
 	    	        $("#panelGroup").append(
 			            "<div class='col-xs-12' id='panel"+i+"'>"+
-			                "<div class='panel panel-default' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
+			                "<div class='panel panel-default margin-bottom' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
 			                    "<div class='panel-body' style='padding-bottom:0px;' id='"+totalList[i].riceTimeId+"'>"+
 			                        "<div class='row'>"+
 			                            "<div class='col-xs-2 text-center'>"+
@@ -103,9 +111,18 @@ $(document).ready(function(){
 			}
 		});
 	}
-
 	getData();
 
+
+	//웹페이지에서 뒤로가기 누른 경우,
+	// history.pushState(null, null, location.href); 
+	// window.onpopstate = function(event) { 
+	// 	alert("back")
+	// 	store.remove("token") //토큰 삭제
+	// 	location.href="../index.html"
+	// }
+
+	
 	//조건에 맞는 ID 를 가진 것들은 보이게 하고 나머지는 보이지 않게 하기
 	$("#selectBox").change(function(){
 		var place = $(this).children("option:selected").text();

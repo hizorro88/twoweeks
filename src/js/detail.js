@@ -1,6 +1,15 @@
 $(document).ready(function(){
 	
-	var riceTimeId = store.get("riceTimeId");
+	var pushId = store.get("pushId");
+	var riceTimeId;
+
+	if(pushId){
+		riceTimeId = pushId;
+		store.remove("pushId")
+	} else {
+		riceTimeId = store.get("riceTimeId");		
+	}
+	
 	var userId = store.get("userId");
 	var username = store.get("username");
 	var detailData;	//상세 데이터(전체)
@@ -33,23 +42,22 @@ $(document).ready(function(){
 		
 		for(var i=0; i<attendDataLength; i++){
 			if ((i != 0) && (i % 5 == 0)){
-				console.log("test")
 				$("#attendList").append("<p/>");
 			}
 
-			$("#attendList").append("<span class='label label-invite' id='"+ attendData[i].userId +"'></span>&nbsp;");
-			
-			//true / false 따라서 초기 색상 변경
-			if (attendData[i].join == "true"){
-				$("#"+attendData[i].userId).attr("class", "label label-invite");	
+			var attendColor;
+			if (attendData[i].joinstatus == "true"){
+				attendColor = 'label-invite';
+			} else if(attendData[i].joinstatus == "false") {
+				attendColor = 'label-notinvite';
 			} else {
-				$("#"+attendData[i].userId).attr("class", "label label-notinvite");
+				attendColor = 'label-holdinvite';
 			}
 
-			//참가자 이름 표시
-            $("#"+attendData[i].userId).text(attendData[i].joiner);
+			$("#attendList").append("<span class='label "+attendColor+"' id='"+ attendData[i].userId +"'>"+attendData[i].joiner+"</span>&nbsp;");
         }
 	}
+
 	//기본 폼 세팅
 	function formSetting(){
 		var imageInfo;
@@ -116,7 +124,7 @@ $(document).ready(function(){
 			// 본인이 있다면 참석/불참
 			for(var i=0; i<attendDataLength; i++){
 				if (attendData[i].userId === userId){
-					if (attendData[i].join == "true"){
+					if (attendData[i].joinstatus == "true"){
 						$("#attendQ").hide();
 						$("#attendN").show();
 					} else {
@@ -146,7 +154,7 @@ $(document).ready(function(){
 			}
 
 			if (attendInOut){
-				if (attendData[myI].join == "true"){ //불참 활성화
+				if (attendData[myI].joinstatus == "true"){ //불참 활성화
 					attendValue = true;
 				} else {							//참석 활성화
 					attendValue = false;
@@ -194,14 +202,18 @@ $(document).ready(function(){
 				dataType: 'json',
 				success: function(data) {
 					//버튼 색상 변경
-					if(data.join == "true"){
+					if(data.joinstatus == "true"){
 						$("#attendN").show();
 						$("#attendQ").hide();
 						$("#" + joinerId).attr("class", "label label-invite");
-					} else {
+					} else if (data.joinstatus == "false") {
 						$("#attendQ").show();
 						$("#attendN").hide();
 						$("#" + joinerId).attr("class", "label label-notinvite");	
+					} else {
+						$("#attendQ").show();
+						$("#attendN").hide();
+						$("#" + joinerId).attr("class", "label label-holdinvite");	
 					}
 					// location.reload();//화면 갱신
 				}
@@ -209,7 +221,7 @@ $(document).ready(function(){
 		} else {
 			//내 정보가 없는 경우, 생성
 			$.ajax({
-				url: store.get("url")+'/ricetimes/' + riceTimeId + '/persons',
+				url: store.get("url")+'/ricetimes/' + riceTimeId + '/person',
 				headers: {
 			        'Content-Type':'application/json',
 		        	'x-auth-token':store.get("token")
