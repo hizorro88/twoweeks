@@ -33,14 +33,13 @@
       <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
               <div class="row">
-                  <div class="col-xs-4 text-left" style="padding:10px 0 0 15px;">
-                    <button class="btn btn-sm btn-default button-shadow" onclick="location.href='/views/list.html'";><strong><i class="fa fa-list" aria-hidden="true"></i> 목록으로</strong></button>
-                </div>
+                  <div class="col-xs-4">
+                  </div>
                   <div class="col-xs-4 text-center">
                       <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50px; height: 50px;"/></a>
                   </div>
                   <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
-                      <button class="btn btn-sm btn-default button-shadow" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
+                      <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
                   </div>
               </div>
           </div>
@@ -49,10 +48,10 @@
     <div class="container">
         <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd">
             <div class="col-xs-6">
-                <button class="btn btn-sm btn-warning button-shadow" id="back"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 취소</strong></button>
+                <button class="btn btn-sm btn-warning" id="back"><strong><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> 취소</strong></button>
             </div>
             <div class="col-xs-6 text-right">
-                 <button class="btn btn-sm btn-success button-shadow" id="submit"><strong>등록 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                 <button class="btn btn-sm btn-success" id="submit"><strong>등록 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -72,53 +71,53 @@
       </div>
 
       <div class="panel panel-default margin-bottom">
-        <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
-          <div class="row">
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                <input type="radio" name="location" id="inlineRadio1" value="광화문" checked>
-              </div> -->
-              <span class="label label-X button-shadow">광화문</span>
-            </div>
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                  <input type="radio" name="location" id="inlineRadio1" value="우면동">
-              </div> -->
-              <span class="label label-X button-shadow">우면동</span>
-            </div>
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                  <input type="radio" name="location" id="inlineRadio1" value="분당">
-              </div> -->
-              <span class="label label-X button-shadow">분당</span>
-            </div>
+          <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
+              <div class="row">
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="광화문" checked>
+                      </div>
+                      <span class="label label-G">광화문</span>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="우면동">
+                      </div>
+                      <span class="label label-W">우면동</span>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="location" id="inlineRadio1" value="분당">
+                      </div>
+                      <span class="label label-B">분당</span>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
 
-      <div class="panel panel-default margin-bottom" >
-        <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
-          <div class="row" >
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                <input type="radio" name="category" id="inlineRadio1" value="밥" checked>
-              </div> --> 
-              <img src="/img/plate_50x50.png" id="밥" class="img-shadow grayscale">
-            </div>
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                <input type="radio" name="category" id="inlineRadio1" value="술">
-              </div> -->
-              <img src="/img/beer_50x50.png" id="술" class="img-shadow grayscale">
-            </div>
-            <div class="col-xs-4 text-center">
-              <!-- <div>
-                <input type="radio" name="category" id="inlineRadio1" value="커피">
-              </div> -->
-              <img src="/img/coffee_50x50.png" id="커피" class="img-shadow grayscale">
-            </div>
+      <div class="panel panel-default margin-bottom">
+          <div class="panel-body" style="padding-top:10px;padding-bottom:10px;">
+              <div class="row">
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="category" id="inlineRadio1" value="밥" checked>
+                      </div>
+                      <img src="/img/plate_50x50.png">
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="category" id="inlineRadio1" value="술">
+                      </div>
+                      <img src="/img/beer_50x50.png">
+                  </div>
+                  <div class="col-xs-4 text-center">
+                      <div>
+                          <input type="radio" name="category" id="inlineRadio1" value="커피">
+                      </div>
+                      <img src="/img/coffee_50x50.png">
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
 
       <div class="row" style="margin-bottom:10px;">

@@ -1,16 +1,8 @@
 $(document).ready(function(){
 
-	// var pushMove = function(){
-	// 	alert("push:  "+store.get(pushId));
-	// 	if (store.get(pushId)){
-	// 		alert("push")
-	// 		location.href="/views/detail.html"
-	// 	}
-	// }
-	// pushMove();
-
 	var totalList;	//받아온 데이터를 저장할 변수
 	var listLen;	//받아온 데이터 객체의 수
+    var inviteListData;
 
 	var getData = function(){
 		$.ajax({
@@ -23,6 +15,11 @@ $(document).ready(function(){
 	    	// async: false, //결과값 정렬을 위해 전역변수에 넣어 두기 위해
 			type: 'GET',
 			dataType: 'json',
+			error: function(data, status, err) {
+				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				store.remove("token");
+				window.location.href="../index.html";
+			},
 			success: function(data) {
 				store.set("listData", data);
 				totalList = data;
@@ -73,7 +70,7 @@ $(document).ready(function(){
 
 	    	        $("#panelGroup").append(
 			            "<div class='col-xs-12' id='panel"+i+"'>"+
-			                "<div class='panel panel-default margin-bottom' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
+			                "<div class='panel panel-default margin-bottom button-shadow' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
 			                    "<div class='panel-body' style='padding-bottom:0px;' id='"+totalList[i].riceTimeId+"'>"+
 			                        "<div class='row'>"+
 			                            "<div class='col-xs-2 text-center'>"+
@@ -105,35 +102,136 @@ $(document).ready(function(){
 						var riceTimeId = $(this).find('div:eq(0)').attr('id');
 						// console.log(riceTimeId)
 						store.set("riceTimeId", riceTimeId);
-						location.href="/views/detail.html";
+						window.location.href="/views/detail.html";
 					});
 		        }
 			}
 		});
 	}
+
 	getData();
 
+	var getInviteList = function(){
+		$.ajax({
+			url: store.get("url")+'/user/persons',
+			headers: {
+		        'Content-Type':'application/json',
+		        'x-auth-token':store.get("token")
+		    },
+		    async: false, //결과값 전역변수에 넣어 두기
+			type: 'GET',
+			dataType: 'json',
+			success: function(data) {
+				inviteListData = data;
+				store.set("inviteListData", inviteListData);
+			},
+			error: function(data, status, err) {
+				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				store.remove("token");
+				window.location.href="../index.html";
+			}
+		});
+	}
 
-	//웹페이지에서 뒤로가기 누른 경우,
-	// history.pushState(null, null, location.href); 
-	// window.onpopstate = function(event) { 
-	// 	alert("back")
-	// 	store.remove("token") //토큰 삭제
-	// 	location.href="../index.html"
-	// }
-
+	$(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#scrollUp').fadeIn();
+            } else {
+                $('#scrollUp').fadeOut();
+            }
+        });
+        
+        $("#scrollUp").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
 	
-	//조건에 맞는 ID 를 가진 것들은 보이게 하고 나머지는 보이지 않게 하기
-	$("#selectBox").change(function(){
-		var place = $(this).children("option:selected").text();
+	//저장된 데이터가 없으면 수행
+	if (!store.get("inviteListData")){
+		getInviteList();	
+	}
+	
+	var btn_g = true;
+	var btn_w = true;
+	var btn_b = true;
+	$('span').click(function(e){
+		var location = $(this).text();
+		location = location.trim();
+		
+		if (location == "광화문") {
+			btn_g = (btn_g)? false:true;
+		} else if (location == "우면동") {
+			btn_w = (btn_w)? false:true;
+		} else if (location == "분당") {
+			btn_b = (btn_b)? false:true;
+		}
+
+
+		if (btn_g == false && btn_w == false && btn_b == false){
+			alert("적어도 하나는 선택해야 합니다.");
+			if (location == "광화문") {
+				btn_g = (btn_g)? false:true;
+			} else if (location == "우면동") {
+				btn_w = (btn_w)? false:true;
+			} else if (location == "분당") {
+				btn_b = (btn_b)? false:true;
+			}
+			return false;
+		}
+		// console.log(btn_g);
+		// console.log(btn_w);
+		// console.log(btn_b);
+		if (location == "광화문") {
+			(btn_g)? $(this).attr('class', 'label label-List button-shadow label-G'):$(this).attr('class', 'label label-List label-X');
+		} else if (location == "우면동") {
+			(btn_w)? $(this).attr('class', 'label label-List button-shadow label-W'):$(this).attr('class', 'label label-List label-X');
+		} else if (location == "분당") {
+			(btn_b)? $(this).attr('class', 'label label-List button-shadow label-B'):$(this).attr('class', 'label label-List label-X');
+		}
 
 		for(var i=0; i<listLen; i++){
-			if (place === "전체"){
+			if (btn_g == true && btn_w == false && btn_b == false) {
+				if(totalList[i].location == "광화문"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
+			} else if (btn_g == true && btn_w == true && btn_b == false) {
+				if(totalList[i].location == "광화문" || totalList[i].location == "우면동"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
+			} else if (btn_g == true && btn_w == true && btn_b == true) {
 				$("#panel"+i).show();
-			} else if(place === totalList[i].location){
-				$("#panel"+i).show();
-			} else {
-				$("#panel"+i).hide();
+			} else if (btn_g == true && btn_w == false && btn_b == true) {
+				if(totalList[i].location == "광화문" || totalList[i].location == "분당"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
+			} else if (btn_g == false && btn_w == true && btn_b == true) {
+				if(totalList[i].location == "우면동" || totalList[i].location == "분당"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
+			} else if (btn_g == false && btn_w == false && btn_b == true) {
+				if(totalList[i].location == "분당"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
+			} else if (btn_g == false && btn_w == true && btn_b == false) {
+				if(totalList[i].location == "우면동"){
+					$("#panel"+i).show();
+				} else {
+					$("#panel"+i).hide();
+				}
 			}
 		}
 	});

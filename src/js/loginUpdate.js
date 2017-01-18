@@ -32,7 +32,7 @@ $(document).ready(function(){
 				}),
 				complete: function(data, textStatus, jqXHR ) {
 					if (data.status === 200)
-						location.href="/views/list.html";
+						window.location.href="/views/list.html";
 				}
 			});
 
@@ -49,11 +49,11 @@ $(document).ready(function(){
 	window.onpopstate = function(event) { 
 		alert("back")
 		store.remove("token") //토큰 삭제
-		location.href="../index.html"
+		window.location.href="../index.html"
 	}
 
 	$("#back").click(function(){
 		store.remove("token") //토큰 삭제
-		location.href="../index.html"
+		window.location.href="../index.html"
 	});
 });

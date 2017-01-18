@@ -28,29 +28,31 @@
   </head>
 
   <body>
+
       <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
               <div class="row">
-                  <div class="col-xs-4">
-                  </div>
+                  <div class="col-xs-4 text-left" style="padding:10px 0 0 15px;">
+                    <button class="btn btn-sm btn-default button-shadow" onclick="location.href='/views/list.html'";><strong><i class="fa fa-list" aria-hidden="true"></i> 목록으로</strong></button>
+                </div>
                   <div class="col-xs-4 text-center">
                      <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50px; height: 50px;"/></a>
                   </div>
-                  <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;" >
-                      <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
+                  <div class="col-xs-4 text-right " style="padding:10px 15px 0 0;" >
+                      <button class="btn btn-sm btn-default button-shadow" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
                   </div>
               </div>
           </div>
       </nav>
 
-    <div class="container">
+    <div class="container displayNone">
 
-        <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd">
+        <div class="row" style="padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ddd" id="mine">
             <div class="col-xs-6">
-                <button class="btn btn-sm btn-danger" id="delete"><strong><i class="fa fa-times" aria-hidden="true"></i> 삭제</strong></button>
+                <button class="btn btn-sm btn-danger button-shadow" id="delete"><strong><i class="fa fa-times" aria-hidden="true"></i> 삭제</strong></button>
             </div>
             <div class="col-xs-6 text-right">
-                 <button class="btn btn-sm btn-success" id="update"><strong>수정 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                 <button class="btn btn-sm btn-success button-shadow" id="update"><strong>수정 <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -82,7 +84,7 @@
       <!-- 참석여부: 참석/불참석 -->
       <div class="form-group row" id="attendQ">
         <div class="col-md-10">
-          <a class="btn btn-sm btn-info btn-block" role="button" id="attendBtn">
+          <a class="btn btn-sm btn-info btn-block button-shadow" role="button" id="attendBtn">
               <h4>
                   <i class="fa fa-handshake-o fa-lg"></i><strong> 참석</strong>
               </h4>
@@ -92,7 +94,7 @@
 
       <div class="form-group row" id="attendN">
         <div class="col-md-10">
-          <a class="btn btn-sm btn-warning btn-block" role="button" id="attendBtnN">
+          <a class="btn btn-sm btn-warning btn-block button-shadow" role="button" id="attendBtnN">
               <h4 style="margin:0px">
                   <span class="fa-stack fa-lg">
                   <i class="fa fa-handshake-o"></i>

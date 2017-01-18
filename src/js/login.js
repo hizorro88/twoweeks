@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 	$('#userId').val("010-");
 
-	
 	var signalToAndroid = function(){
 		window.android.setMessage("go android");
 		// alert("go android!");
@@ -27,23 +26,12 @@ $(document).ready(function () {
 			store.set("pushId", pushId);
 			// alert("2:"+ store.get("pushId"));
 			if (store.get("token")){
-				location.href="/views/detail.html"
+				// alert("3:"+ store.get("pushId"));
+				window.location.href="/views/detail.html"
 			}
-		}
+		} 
 	}
 	
-	try {
-		//안드로이드에서 값 받아오기
-		signalToAndroid();
-	} catch(e) {
-		// console.log(e)
-	}
-	// } finally {
-
-	// }
-	
-
-
 	//token 있는 경우
 	var isToken = function(){
 		if(store.get("token")){
@@ -54,12 +42,21 @@ $(document).ready(function () {
 				store.remove("url");
 				store.remove("token");
 			} else {
-				location.href="/views/list.html"	
+				window.location.href="/views/list.html"	
 			}
 		}
 	}
-	isToken();
 
+	try {
+		//안드로이드에서 값 받아오기
+		signalToAndroid();
+		// alert("try")
+	} catch(e) {
+		// console.log(e)
+	} finally {
+		isToken();
+		// alert("try2")
+	}
 
 	var postPersonalToken = function(){
 		$.ajax({
@@ -77,23 +74,26 @@ $(document).ready(function () {
 				//token 저장
 				// alert(personalToken);
 				store.set("personalToken", personalToken);
+				// return;
 			},
 		});
 	}
 
-	var loginCheck = function(){
-		if (pw == "1234"){
-			//로그인 수정화면으로 이동
-			location.href="/views/loginUpdate.html"
-		} 
-		else if(pushId.length != 0 &&  pushId.length != 4){
-			location.href="/views/detail.html"
-		} 
-		else {
-			//목록 화면으로 이동
-			location.href="/views/list.html"
-		}	
-	}
+	// var loginCheck = function(){
+		// if (pw == "1234"){
+		// 	//로그인 수정화면으로 이동
+		// 	window.location.href="/views/loginUpdate.html"
+		// } 
+		// else if(pushId.length != 0 &&  pushId.length != 4){
+		// 	alert(pushId);
+		// 	window.location.href="/views/detail.html"
+		// } 
+		// else {
+		// 	//목록 화면으로 이동
+		// 	alert(pushId);
+		// 	window.location.href="/views/list.html"
+		// }	
+	// }
 
 	//id 입력하는 부분
 	$('#userId').keyup(function(){
@@ -162,10 +162,28 @@ $(document).ready(function () {
 			success: function(data) {
 				//기본 정보 저장(local)
 				defaultDataSetting(data);
-				//기기 토큰 정보 저장(server)
-				postPersonalToken();
+				
+				if(personalToken){
+					// alert(personalToken)
+					//기기 토큰 정보 저장(server)
+					postPersonalToken();	
+				}
+				
 				//최종 목적지 결정
-				loginCheck();
+				// loginCheck();
+				if (pw == "1234"){
+					//로그인 수정화면으로 이동
+					window.location.href="/views/loginUpdate.html"
+				} 
+				else if(pushId.length != 0 &&  pushId.length != 4){
+					// alert("상세");
+					window.location.href="/views/detail.html"
+				} 
+				else {
+					//목록 화면으로 이동
+					// alert("목록");
+					window.location.href="/views/list.html"
+				}	
 			},
 			error: function(data, status, err) {
 				if (data.status == 403){

@@ -4,44 +4,29 @@ $(document).ready(function(){
 	var username = store.get("username");
 	var team = store.get("department");
 
-	var inviteListData;
+	var inviteListData = store.get("inviteListData");
 	var postInviteListData;
-	// 받아온 초대 인원
-	var getInviteList = function(){
-		$.ajax({
-			url: store.get("url")+'/user/persons',
-			headers: {
-		        'Content-Type':'application/json',
-		        'x-auth-token':store.get("token")
-		    },
-		    async: false, //결과값 전역변수에 넣어 두기
-			type: 'GET',
-			dataType: 'json',
-			success: function(data) {
-				inviteListData = data;
-				store.set("inviteListData", inviteListData);
-				for (var i=0; i<inviteListData.length; i++){
-					// 본인 이름 제외하고 리스트 구성
-					if (inviteListData[i].username != username){
-						//제목 정보 수정
-						var subtitle = inviteListData[i].department;
-						var retitle;
-						if (subtitle.length > 6){
-							retitle = subtitle.substring(0, 7) + ".."; //제목
-						} else {
-							retitle = subtitle;
-						}
-
-						$("#addList").append("<option value='"+inviteListData[i].userId+"'>"+inviteListData[i].username+" ("+retitle+") "+"</option>");	
-					}
+	var location="광화문";
+	var category="밥";
+	
+	var settingInviteList = function(){
+		for (var i=0; i<inviteListData.length; i++){
+			// 본인 이름 제외하고 리스트 구성
+			if (inviteListData[i].username != username){
+				//제목 정보 수정
+				var subtitle = inviteListData[i].department;
+				var retitle;
+				if (subtitle.length > 5){
+					retitle = subtitle.substring(0, 6) + ".."; //제목
+				} else {
+					retitle = subtitle;
 				}
-			},
-			error: function(data, status, err) {
-				alert("error")
+
+				$("#addList").append("<option value='"+inviteListData[i].userId+"'>"+inviteListData[i].username+" ("+retitle+") "+"</option>");	
 			}
-		});
+		}
 	}
-	getInviteList();
+	settingInviteList();
 
 	$(".chosen-select").chosen().change(function(event){
 	     if(event.target == this){
@@ -51,7 +36,6 @@ $(document).ready(function(){
 	     	var j=0;
 
 	     	for(var i=0; i<checkedItems.length; i++){
-
 	     		var invite_person = new Object();
 		     	invite_person.joiner = leftstring[j]; //이름 
 		     	invite_person.userId = checkedItems[i]; //번호
@@ -63,6 +47,41 @@ $(document).ready(function(){
 	     }
 	});
 
+	// //광화문, 양재동, 분당 클릭 시,
+	$('span').click(function(e){
+		location = $(this).text();
+		// console.log(location)
+		if (location == "광화문"){
+			$(this).attr('class', 'label button-shadow label-G');
+		} else if (location == "우면동"){
+			$(this).attr('class', 'label button-shadow label-W');
+		} else {
+			$(this).attr('class', 'label button-shadow label-B');
+		}
+
+		$('span').each(function(index, value){
+			var iteratorLocation = $(this).text();
+			if (iteratorLocation == "광화문" || iteratorLocation == "우면동" || iteratorLocation == "분당" ){
+				if (location != iteratorLocation){
+					$(this).attr('class', 'label label-X');
+				}
+			}
+		});
+	});
+
+	//광화문, 양재동, 분당 클릭 시,
+	$('img').click(function(e){
+		category = $(this).attr("id");
+		// console.log(category)
+		$(this).attr('class', 'img-shadow')
+		$('img').each(function(index, value){
+			if ($(this).attr("id") == "밥" || $(this).attr("id") == "술" || $(this).attr("id") == "커피" ){
+				if (category != $(this).attr("id")){
+					$(this).attr('class', 'img-shadow grayscale');
+				}	
+			}
+		});
+	});
 
 
 	var postItem = function(){
@@ -72,12 +91,13 @@ $(document).ready(function(){
 					team: team,
 					title: $('#title').val(),
 					meetingDate: $('#meetingDate').val(),
-					category: $('input:radio[name="category"]:checked').val(),
-					location: $('input:radio[name="location"]:checked').val(),
+					category: category,
+					location: location,
 					content: $('#contents').val(),
-					joinRiceTime: postInviteListData
+					pushRiceTime: postInviteListData
 				})
 
+		// console.log(sendData);
 		var token = store.get("token");
 
 		$.ajax({
@@ -89,13 +109,16 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data: sendData,
+			error: function(data, status, err) {
+				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				store.remove("token");
+				window.location.href="../index.html";
+			},
 			success: function(data) {
-				alert("만남이 등록되었습니다.");
-				// var ricetimeid = data.riceTimeId;
 				
-				// postInviteList(ricetimeid);
-
-				location.href = "/views/list.html";
+				alert("만남이 등록되었습니다.");
+				window.location.href = "/views/list.html";
+				// console.log(data);
 			}
 		});
 	}
@@ -145,6 +168,6 @@ $(document).ready(function(){
 
 	// 취소버튼 클릭 시, 이전 화면으로 이동
 	$('#back').click(function(){
-		location.href = "/views/list.html";
+		window.location.href = "/views/list.html";
 	});
 });

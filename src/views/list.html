@@ -22,63 +22,64 @@
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="row">
+            <div class="row"  style="border-width:0 0 1px 0; border-color:#cd0c0c; border-style:solid;">
                 <div class="col-xs-4">
+                    
                 </div>
                 <div class="col-xs-4 text-center">
                     <a href="/views/list.html"><img src="/img/tastytime_logo.png" style="width:50px; height: 50px;"/></a>
                 </div>
                 <div class="col-xs-4 text-right" style="padding:10px 15px 0 0;">
-                    <button class="btn btn-sm btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
+                    <button class="btn btn-sm button-shadow btn-default" id="logout"><strong>로그아웃 <i class="fa fa-sign-out" aria-hidden="true"></i> </strong></button>
+                </div>
+            </div>
+        
+
+        <!-- <div class="container"> -->
+            <div class="row" style="margin-top:12px;margin-bottom:5px;">
+
+                <div class="col-xs-9" style="padding: 3px 0 0 30px">
+                    <!-- <span class="label label-List button-shadow label-T" style="margin-right:5px;"><strong>전체</strong></span> -->
+                    <span class="label label-List button-shadow label-G" style="margin-right:5px;"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 광화문</strong></span>
+                    <span class="label label-List button-shadow label-W" style="margin-right:5px;"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 우면동</strong></span>
+                    <span class="label label-List button-shadow label-B"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 분당</strong></span>
+                    <div class="col-xs-12" style="padding: 3px 0 0 0">
+                        <span style="margin-right:5px;font-size: 10px"><strong><i class="fa fa-arrow-up" aria-hidden="true"></i> 위 버튼을 클릭하시면 해당되는 지역을 보실 수 있습니다.</strong></span>
+                    </div>
+                </div>
+                
+                <div class="col-xs-3 text-right" style="padding: 3px 30px 0 0">
+                    <a href="/views/write.html" class="btn btn-sm button-shadow btn-success"><strong>등록 <i class="fa fa-plus-circle" aria-hidden="true"></i></strong></a>
                 </div>
             </div>
         </div>
+
     </nav>
 
-
-    <div class="container">
-        <div class="row" style="margin-top:15px;margin-bottom:15px;">
-            <div class="col-xs-6">
-                <select class="form-control input-sm" id="selectBox">
-                  <option>전체</option>
-                  <option>광화문</option>
-                  <option>우면동</option>
-                  <option>분당</option>
-                </select>
-
-                <!-- <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> <span class="label label-success">광화문</span>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> <span class="label label-success">우면동</span>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> <span class="label label-success">분당</span>
-                </label> -->
-            </div>
-            <div class="col-xs-6 text-right">
-                <a href="/views/write.html" class="btn btn-sm btn-success">
-                    <strong><i class="fa fa-plus-circle" aria-hidden="true"></i> 등록</strong>
-                </a>
-            </div>
-        </div>
-        <div class="row" style="margin-bottom:20px;">
-            <div class="col-xs-12 text-right">
-                <span class="label label-G" style="margin-right:5px;">광화문</span>
-                <span class="label label-W" style="margin-right:5px;">우면동</span>
-                <span class="label label-B">분당</span>
-            </div>
-        </div>
-
-<!--    <form class="form-inline">
-
-        </form> -->
+    <div class="container-fluid" style="margin-top: 75px">
+        
+            <!-- <div class="row" style="margin-top:15px;margin-bottom:15px;">
+                <div class="col-xs-9" style="padding: 3px 0 0 15px">
+                    <span class="label label-List button-shadow label-G" style="margin-right:5px;"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 광화문</strong></span>
+                    <span class="label label-List button-shadow label-W" style="margin-right:5px;"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 우면동</strong></span>
+                    <span class="label label-List button-shadow label-B"><strong><i class="fa fa-building-o" aria-hidden="true"></i> 분당</strong></span>
+                    <div class="col-xs-12" style="padding: 3px 0 0 0">
+                        <span style="margin-right:5px;font-size: 10px"><strong><i class="fa fa-arrow-up" aria-hidden="true"></i> 위 버튼을 클릭하시면 해당되는 지역을 보실 수 있습니다.</strong></span>
+                    </div>
+                </div>
+                
+                <div class="col-xs-3 text-right">
+                    <a href="/views/write.html" class="btn btn-sm button-shadow btn-success"><strong>등록 <i class="fa fa-plus-circle" aria-hidden="true"></i></strong></a>
+                </div>
+            </div> -->
 
         <div class="row" id="panelGroup">
                 <!-- 패널을 반복해서 보여줌 -->
         </div>
 
     </div>
+
+    <img src="/img/top.png" style="width:50px; height: 50px;" id="scrollUp" />
 
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>

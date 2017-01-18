@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	
+$(document).ready(function(){	
+
 	var pushId = store.get("pushId");
 	var riceTimeId;
 
@@ -25,30 +25,38 @@ $(document).ready(function(){
     	},
 		type: 'GET',
 		dataType: 'json',
+		error: function(data, status, err) {
+			alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+			store.remove("token");
+			window.location.href="../index.html";
+		},
 		success: function(data) {
+			console.log(data.joinRiceTime)
 			//전체 데이터
-			detailData = store.set("detailData", data);
+			store.set("detailData", data);
+			detailData = store.get("detailData");
 			//참가자 데이터
 			attendData = detailData.joinRiceTime;
 			attendDataLength = attendData.length;
 			//참가자, 기본 폼 세팅
-			attendSetting();
 			formSetting();
+			attendSetting();
+
+			$('body > .container').removeClass('displayNone');
 		}
 	});
 
 	//참가자 세팅
 	function attendSetting(){
-		
 		for(var i=0; i<attendDataLength; i++){
 			if ((i != 0) && (i % 5 == 0)){
 				$("#attendList").append("<p/>");
 			}
 
 			var attendColor;
-			if (attendData[i].joinstatus == "true"){
+			if (attendData[i].joinStatus == "true"){
 				attendColor = 'label-invite';
-			} else if(attendData[i].joinstatus == "false") {
+			} else if(attendData[i].joinStatus == "false") {
 				attendColor = 'label-notinvite';
 			} else {
 				attendColor = 'label-holdinvite';
@@ -118,13 +126,12 @@ $(document).ready(function(){
 		//본인 아이디와 글의 아이디가 같은 경우(본인이 작성한 글인 경우)
 		if (userId === detailData.userId){
 			// 수정, 삭제 버튼 활성화
-			$("#update").show(); 
-			$("#delete").show();
+			$("#mine").show();
 			
 			// 본인이 있다면 참석/불참
 			for(var i=0; i<attendDataLength; i++){
 				if (attendData[i].userId === userId){
-					if (attendData[i].joinstatus == "true"){
+					if (attendData[i].joinStatus == "true"){
 						$("#attendQ").hide();
 						$("#attendN").show();
 					} else {
@@ -136,8 +143,7 @@ $(document).ready(function(){
 		//남의 글
 		} else { 
 			// 수정, 삭제 버튼 비활성화
-			$("#update").hide(); 
-			$("#delete").hide();
+			$("#mine").hide();
 			
 			var attendValue; //참석 하는지 안하는지
 			var attendInOut; //참석자 명단에 있는지 없는지
@@ -154,7 +160,7 @@ $(document).ready(function(){
 			}
 
 			if (attendInOut){
-				if (attendData[myI].joinstatus == "true"){ //불참 활성화
+				if (attendData[myI].joinStatus == "true"){ //불참 활성화
 					attendValue = true;
 				} else {							//참석 활성화
 					attendValue = false;
@@ -202,11 +208,11 @@ $(document).ready(function(){
 				dataType: 'json',
 				success: function(data) {
 					//버튼 색상 변경
-					if(data.joinstatus == "true"){
+					if(data.joinStatus == "true"){
 						$("#attendN").show();
 						$("#attendQ").hide();
 						$("#" + joinerId).attr("class", "label label-invite");
-					} else if (data.joinstatus == "false") {
+					} else if (data.joinStatus == "false") {
 						$("#attendQ").show();
 						$("#attendN").hide();
 						$("#" + joinerId).attr("class", "label label-notinvite");	
@@ -232,6 +238,11 @@ $(document).ready(function(){
 					joiner : username, 
 					userId : userId
 				}),
+				error: function(data, status, err) {
+					alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+					store.remove("token");
+					window.location.href="../index.html";
+				},
 				success: function(data) {
 					location.reload();//화면 갱신
 				}
@@ -261,20 +272,20 @@ $(document).ready(function(){
 			dataType: 'json',
 			complete: function(data) {
 				alert("만남이 삭제되었습니다.");
-				location.href="/views/list.html"
+				window.location.href="/views/list.html"
 			}
 		});
 	});
 
 	$("#update").click(function(){
-		location.href="/views/update.html"
+		window.location.href="/views/update.html"
 	});
 	
 	// 목록 버튼 클릭 시
 	$('#list').click(function(){
 		// store.remove("detaildata");
 		store.remove("riceTimeId");
-		location.href="/views/list.html";
+		window.location.href="/views/list.html";
 	});
 
 });
