@@ -16,7 +16,7 @@ $(document).ready(function(){
 			type: 'GET',
 			dataType: 'json',
 			error: function(data, status, err) {
-				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
 				store.remove("token");
 				window.location.href="../index.html";
 			},
@@ -62,15 +62,15 @@ $(document).ready(function(){
 					//제목 정보 수정
 					var subtitle = totalList[i].title;
 					var retitle;
-					if (subtitle.length > 15){
-						retitle = subtitle.substring(0, 16) + "..."; //제목
+					if (subtitle.length > 14){
+						retitle = subtitle.substring(0, 15) + ".."; //제목
 					} else {
 						retitle = subtitle;
 					}
 
 	    	        $("#panelGroup").append(
 			            "<div class='col-xs-12' id='panel"+i+"'>"+
-			                "<div class='panel panel-default margin-bottom button-shadow' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
+			                "<div class='panel margin-bottom panel-shadow' style='border-left-color: #"+colorInfo+";border-left-width:15px;'>"+
 			                    "<div class='panel-body' style='padding-bottom:0px;' id='"+totalList[i].riceTimeId+"'>"+
 			                        "<div class='row'>"+
 			                            "<div class='col-xs-2 text-center'>"+
@@ -126,13 +126,19 @@ $(document).ready(function(){
 				store.set("inviteListData", inviteListData);
 			},
 			error: function(data, status, err) {
-				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
 				store.remove("token");
 				window.location.href="../index.html";
 			}
 		});
 	}
 
+	//저장된 데이터가 없으면 수행
+	if (!store.get("inviteListData")){
+		getInviteList();	
+	}
+
+	//스크롤 올리는 버튼
 	$(function() {
         $(window).scroll(function() {
             if ($(this).scrollTop() > 500) {
@@ -150,15 +156,11 @@ $(document).ready(function(){
         });
     });
 	
-	//저장된 데이터가 없으면 수행
-	if (!store.get("inviteListData")){
-		getInviteList();	
-	}
-	
+	//광화문/우면동/분당 정렬 관련
 	var btn_g = true;
 	var btn_w = true;
 	var btn_b = true;
-	$('span').click(function(e){
+	$('.location_btn button').click(function(e){
 		var location = $(this).text();
 		location = location.trim();
 		
@@ -169,7 +171,6 @@ $(document).ready(function(){
 		} else if (location == "분당") {
 			btn_b = (btn_b)? false:true;
 		}
-
 
 		if (btn_g == false && btn_w == false && btn_b == false){
 			alert("적어도 하나는 선택해야 합니다.");
@@ -186,11 +187,18 @@ $(document).ready(function(){
 		// console.log(btn_w);
 		// console.log(btn_b);
 		if (location == "광화문") {
-			(btn_g)? $(this).attr('class', 'label label-List button-shadow label-G'):$(this).attr('class', 'label label-List label-X');
+
+			$(this)
+			.addClass((btn_g)? 'btn-shadow btn-danger' : 'label-X')
+			.removeClass((btn_g)? 'label-X' : 'btn-shadow btn-danger')
 		} else if (location == "우면동") {
-			(btn_w)? $(this).attr('class', 'label label-List button-shadow label-W'):$(this).attr('class', 'label label-List label-X');
+			$(this)
+			.addClass((btn_w)? 'btn-shadow btn-info' : 'label-X')
+			.removeClass((btn_w)? 'label-X' : 'btn-shadow btn-info')
 		} else if (location == "분당") {
-			(btn_b)? $(this).attr('class', 'label label-List button-shadow label-B'):$(this).attr('class', 'label label-List label-X');
+			$(this)
+			.addClass((btn_b)? 'btn-shadow btn-warning' : 'label-X')
+			.removeClass((btn_b)? 'label-X' : 'btn-shadow btn-warning')
 		}
 
 		for(var i=0; i<listLen; i++){
