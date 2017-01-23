@@ -165,6 +165,7 @@ $(document).ready(function(){
 		// console.log(postInviteListData);
 		
 		if ($("#title").val() == ""){
+			alert("제목을 입력하세요.");
 			$("#title").focus();
 		} else if ($("#meetingDate").val() == ""){
 			$("#meetingDate").focus();

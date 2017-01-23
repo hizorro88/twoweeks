@@ -130,7 +130,10 @@ $(document).ready(function(){
 	var year= now.getFullYear();
 	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
 	var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
-	var chan_val = year + '-' + mon + '-' + day + 'T12:00';
+	var hour = now.getHours();
+
+	console.log(hour);
+	var chan_val = year + '-' + mon + '-' + day + 'T' + (hour+1) + ':00';
 	$("#meetingDate").val(chan_val);
 
 	// 물음표 연속 2개시 오류
@@ -155,6 +158,7 @@ $(document).ready(function(){
 	$('#submit').click(function(e){
 		//미작성 부분 체크
 		if ($("#title").val() == ""){
+			alert("제목을 입력하세요.");
 			$("#title").focus();
 		} else if ($("#meetingDate").val() == ""){
 			$("#meetingDate").focus();

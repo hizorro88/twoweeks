@@ -14,13 +14,27 @@ $(document).ready(function () {
 	$('#userId').val("010-");
 
 	var signalToAndroid = function(){
-		window.android.setMessage("go android");
+		try {
+			window.android.setMessage("go android");
+		} catch(err) {
+	        console.log('error');
+	    }
 		// alert("go android!");
 	}
 
+	var signalToIOS = function() {
+	    try {
+	        webkit.messageHandlers.callbackHandler.postMessage("go ios");
+	    } catch(err) {
+	        console.log('error');
+	    }
+	}
 	window.otherMessage=function(token, id){
 		personalToken = token;
 		pushId = id;
+		// alert("success")
+		// alert(personalToken)
+		// alert(pushId)
 
 		if(pushId.length != 0 && pushId.length != 4){
 			store.set("pushId", pushId);
@@ -31,7 +45,7 @@ $(document).ready(function () {
 			}
 		} 
 	}
-	
+
 	//token 있는 경우
 	var isToken = function(){
 		if(store.get("token")){
@@ -50,6 +64,8 @@ $(document).ready(function () {
 	try {
 		//안드로이드에서 값 받아오기
 		signalToAndroid();
+		//아이폰에서 값 받아오기
+		signalToIOS();
 		// alert("try")
 	} catch(e) {
 		// console.log(e)
