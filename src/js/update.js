@@ -103,7 +103,7 @@ $(document).ready(function(){
 	});
 
 	// //광화문, 양재동, 분당 클릭 시,
-	$('span').click(function(e){
+	$('.location_span span').click(function(e){
 		location = $(this).text();
 		// console.log(location)
 		if (location == "광화문"){

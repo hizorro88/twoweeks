@@ -240,6 +240,10 @@ $(document).ready(function(){
 				}),
 				error: function(data, status, err) {
 					alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+					// alert(data);
+					// alert(status);
+					// alert(err);
+
 					store.remove("token");
 					window.location.href="../index.html";
 				},

@@ -61,6 +61,10 @@ img#scrollUp {
     
     margin-bottom: -16px;
 }*/
+.form-group .form-control{
+  -webkit-appearance: none;
+  box-shadow: inset 0 0px 0px rgba(0,0,0,.075);
+}
 
 .margin-bottom {
     margin-bottom:10px;
@@ -133,6 +137,7 @@ img#scrollUp {
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }

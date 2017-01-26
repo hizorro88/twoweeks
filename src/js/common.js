@@ -7,6 +7,23 @@ $(document).ready(function(){
 		window.location.href="../index.html";
 	});
 
+	window.otherMessage=function(token, id){
+		var personalToken = token;
+		var pushId = id;
+		// alert("success")
+		// alert(personalToken)
+		// alert(pushId)
+
+		if(pushId.length != 0 && pushId.length != 4){
+			store.set("pushId", pushId);
+			// alert("2:"+ store.get("pushId"));
+			if (store.get("token")){
+				// alert("3:"+ store.get("pushId"));
+				window.location.href="/views/detail.html"
+			}
+		} 
+	}
+
 	function tokenCheck(){
 		if (!store.get("userId") || !store.get("username") || !store.get("department") || !store.get("url")){
 			store.remove("token");

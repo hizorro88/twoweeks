@@ -5,7 +5,7 @@ $(document).ready(function () {
 	store.remove("listData");
 	var id;
 	var pw;
-	var personalToken;
+	var personalToken="";
 	var pushId="";
 	
 	// store.set("url", "http://192.168.3.2:8000");
@@ -22,13 +22,13 @@ $(document).ready(function () {
 		// alert("go android!");
 	}
 
-	var signalToIOS = function() {
-	    try {
-	        webkit.messageHandlers.callbackHandler.postMessage("go ios");
-	    } catch(err) {
-	        console.log('error');
-	    }
-	}
+	// var signalToIOS = function() {
+	//     try {
+	//         webkit.messageHandlers.callbackHandler.postMessage("go ios");
+	//     } catch(err) {
+	//         console.log('error');
+	//     }
+	// }
 	window.otherMessage=function(token, id){
 		personalToken = token;
 		pushId = id;
@@ -45,6 +45,7 @@ $(document).ready(function () {
 			}
 		} 
 	}
+
 
 	//token 있는 경우
 	var isToken = function(){
@@ -65,16 +66,22 @@ $(document).ready(function () {
 		//안드로이드에서 값 받아오기
 		signalToAndroid();
 		//아이폰에서 값 받아오기
-		signalToIOS();
-		// alert("try")
+		// alert("signal")
+		// signalToIOS();
 	} catch(e) {
 		// console.log(e)
 	} finally {
 		isToken();
-		// alert("try2")
 	}
 
+
 	var postPersonalToken = function(){
+		// alert(personalToken)
+		// alert(typeof(personalToken)) //string
+		// alert(store.get("url")+'/fcm/'+store.get("userId"))
+		// alert(store.get("token"))
+		var sendData = JSON.stringify({"token" : personalToken})
+
 		$.ajax({
 			url: store.get("url")+'/fcm/'+store.get("userId"),
 			headers: {
@@ -83,15 +90,16 @@ $(document).ready(function () {
 		    },
 			type: 'POST',
 			dataType: 'json',
-			data: JSON.stringify({
-				token: personalToken
-			}),
-			complete: function(data) {
-				//token 저장
-				// alert(personalToken);
+			async: false,
+			data: sendData,
+			success: function(data){
+				// alert("success")
+				// alert(data.token)
 				store.set("personalToken", personalToken);
-				// return;
 			},
+			error:function(request,status,error){
+		    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
 		});
 	}
 
@@ -179,7 +187,7 @@ $(document).ready(function () {
 				//기본 정보 저장(local)
 				defaultDataSetting(data);
 				
-				if(personalToken){
+				if(personalToken.length != 0){
 					// alert(personalToken)
 					//기기 토큰 정보 저장(server)
 					postPersonalToken();	
