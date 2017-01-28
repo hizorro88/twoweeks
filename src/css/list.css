@@ -99,20 +99,20 @@ img#scrollUp {
 .label-invite {
     background-color: #5bc0de;
     border: 1px solid #46b8da;
-    color: #000; /*글자색*/
+    color: #fff; /*글자색*/
     font-size: 100%;
 }
 .label-notinvite {
     background-color: #f0ad4e;
     border: 1px solid #eea236;
-    color: #000;
+    color: #fff;
     font-size: 100%;
 }
 
 .label-holdinvite {
     background-color: #9e9e9e;
     border: 1px solid #9e9e9e;
-    color: #000;
+    color: #fff;
     font-size: 100%;
 }
 
