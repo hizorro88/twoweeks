@@ -109,13 +109,19 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType: 'json',
 			data: sendData,
+			beforeSend: function(){
+			$('#loading').removeClass('displayNone');
+			$('body > .container').addClass('displayNone');
+			},
+			complete: function(){
+				$('#loading').addClass('displayNone');
+			},
 			error: function(data, status, err) {
-				alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+				// alert("네트워크 오류입니다. 다시 로그인 해주세요.");
 				store.remove("token");
 				window.location.href="../index.html";
 			},
 			success: function(data) {
-				
 				alert("만남이 등록되었습니다.");
 				window.location.href = "/views/list.html";
 				// console.log(data);

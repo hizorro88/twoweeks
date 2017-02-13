@@ -26,7 +26,7 @@ $(document).ready(function(){
 		type: 'GET',
 		dataType: 'json',
 		error: function(data, status, err) {
-			alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+			// alert("네트워크 오류입니다. 다시 로그인 해주세요.");
 			store.remove("token");
 			window.location.href="../index.html";
 		},
@@ -239,7 +239,7 @@ $(document).ready(function(){
 					userId : userId
 				}),
 				error: function(data, status, err) {
-					alert("네트워크 오류입니다. 다시 로그인 해주세요.");
+					// alert("네트워크 오류트입니다. 다시 로그인 해주세요.");
 					// alert(data);
 					// alert(status);
 					// alert(err);
@@ -274,7 +274,12 @@ $(document).ready(function(){
 		    },
 			type: 'DELETE',
 			dataType: 'json',
+			beforeSend: function(){
+				$('#loading').removeClass('displayNone');
+				$('body > .container').addClass('displayNone');
+			},
 			complete: function(data) {
+				$('#loading').addClass('displayNone');
 				alert("만남이 삭제되었습니다.");
 				window.location.href="/views/list.html"
 			}

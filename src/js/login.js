@@ -19,7 +19,6 @@ $(document).ready(function () {
 		} catch(err) {
 	        console.log('error');
 	    }
-		// alert("go android!");
 	}
 
 	// var signalToIOS = function() {
@@ -45,7 +44,6 @@ $(document).ready(function () {
 			}
 		} 
 	}
-
 
 	//token 있는 경우
 	var isToken = function(){
@@ -74,12 +72,8 @@ $(document).ready(function () {
 		isToken();
 	}
 
-
 	var postPersonalToken = function(){
-		// alert(personalToken)
-		// alert(typeof(personalToken)) //string
-		// alert(store.get("url")+'/fcm/'+store.get("userId"))
-		// alert(store.get("token"))
+
 		var sendData = JSON.stringify({"token" : personalToken})
 
 		$.ajax({
@@ -93,8 +87,6 @@ $(document).ready(function () {
 			async: false,
 			data: sendData,
 			success: function(data){
-				// alert("success")
-				// alert(data.token)
 				store.set("personalToken", personalToken);
 			},
 			error:function(request,status,error){
@@ -102,22 +94,6 @@ $(document).ready(function () {
 		    }
 		});
 	}
-
-	// var loginCheck = function(){
-		// if (pw == "1234"){
-		// 	//로그인 수정화면으로 이동
-		// 	window.location.href="/views/loginUpdate.html"
-		// } 
-		// else if(pushId.length != 0 &&  pushId.length != 4){
-		// 	alert(pushId);
-		// 	window.location.href="/views/detail.html"
-		// } 
-		// else {
-		// 	//목록 화면으로 이동
-		// 	alert(pushId);
-		// 	window.location.href="/views/list.html"
-		// }	
-	// }
 
 	//id 입력하는 부분
 	$('#userId').keyup(function(){
@@ -157,13 +133,13 @@ $(document).ready(function () {
 		store.set("token", data.token);
 		store.set("department", data.department);
 		
-		//토큰관리를 위한 시간
-		var now = new Date();
-		var day = now.getDate();
-		var hour = now.getHours();
-		var min = now.getMinutes();
-		store.set("loginDate", day);
-		store.set("loginTime", hour*60 + min); // 시간 저장
+		// //토큰관리를 위한 시간
+		// var now = new Date();
+		// var day = now.getDate();
+		// var hour = now.getHours();
+		// var min = now.getMinutes();
+		// store.set("loginDate", day);
+		// store.set("loginTime", hour*60 + min); // 시간 저장
 	}
 
 	//로그인 버튼 클릭
@@ -177,6 +153,7 @@ $(document).ready(function () {
 			headers: {
 		        'Content-Type':'application/json'
 		    },
+		    async: false,
 			type: 'POST',
 			dataType: 'json',
 			data: JSON.stringify({
@@ -194,7 +171,6 @@ $(document).ready(function () {
 				}
 				
 				//최종 목적지 결정
-				// loginCheck();
 				if (pw == "1234"){
 					//로그인 수정화면으로 이동
 					window.location.href="/views/loginUpdate.html"

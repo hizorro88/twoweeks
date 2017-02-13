@@ -16,7 +16,7 @@ $(document).ready(function(){
 			type: 'GET',
 			dataType: 'json',
 			error: function(data, status, err) {
-				alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
+				// alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
 				store.remove("token");
 				window.location.href="../index.html";
 			},
@@ -126,7 +126,7 @@ $(document).ready(function(){
 				store.set("inviteListData", inviteListData);
 			},
 			error: function(data, status, err) {
-				alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
+				// alert("로그인 정보가 만료되었습니다. 다시 로그인 해주세요.");
 				store.remove("token");
 				window.location.href="../index.html";
 			}
@@ -183,9 +183,7 @@ $(document).ready(function(){
 			}
 			return false;
 		}
-		// console.log(btn_g);
-		// console.log(btn_w);
-		// console.log(btn_b);
+
 		if (location == "광화문") {
 
 			$(this)
